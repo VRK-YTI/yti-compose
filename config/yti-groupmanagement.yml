@@ -1,0 +1,113 @@
+---
+spring:
+  profile: local
+  application:
+    name: yti-groupmanagement
+  mail:
+    host: smtp.pouta.csc.fi
+    properties:
+      smtp:
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${environment.postgres.host}:${environment.postgres.port}/${service.database-name}
+    username: postgres
+    password:
+
+service:
+  database-name: groupmanagement
+
+server:
+  port: 8002
+
+logging:
+  level:
+    fi.vm.yti: DEBUG
+
+registration:
+  url: https://registration.eduuni.fi
+
+groupmanagement:
+  url: http://localhost:8002
+
+environment:
+  url: https://rhp-dev.suomi.fi
+
+send:
+  admin:
+    emails: false
+
+application:
+  codeListUrl: https://koodistot-dev.suomi.fi/
+  dataModelUrl: https://tietomallit-dev.suomi.fi/
+  terminologyUrl: https://sanastot-dev.suomi.fi/
+  env: local
+
+fake:
+  login:
+    allowed: true
+    mail: "john.doe@example.com"
+    firstName: "John"
+    lastName: "Doe"
+
+impersonate:
+  allowed: true
+
+---
+spring:
+  profile: docker
+  application:
+    name: yti-groupmanagement
+  mail:
+    host: smtp.pouta.csc.fi
+    properties:
+      smtp:
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${environment.postgres.host}:${environment.postgres.port}/${service.database-name}
+    username: postgres
+    password:
+
+service:
+  database-name: groupmanagement
+
+server:
+  port: 8002
+
+logging:
+  level:
+    fi.vm.yti: DEBUG
+
+registration:
+  url: https://registration.eduuni.fi
+
+groupmanagement:
+  url: http://localhost:8002
+
+environment:
+  url: https://rhp-dev.suomi.fi
+
+send:
+  admin:
+    emails: false
+
+application:
+  codeListUrl: https://koodistot-dev.suomi.fi/
+  dataModelUrl: https://tietomallit-dev.suomi.fi/
+  terminologyUrl: https://sanastot-dev.suomi.fi/
+  env: local
+
+fake:
+  login:
+    allowed: true
+    mail: "john.doe@example.com"
+    firstName: "John"
+    lastName: "Doe"
+
+impersonate:
+  allowed: true

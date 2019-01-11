@@ -1,0 +1,57 @@
+---
+spring:
+  profiles: local
+
+service:
+  name: yti-codelist-public-api-service
+
+server:
+  port: 9601
+
+frontend:
+  scheme: http
+  host: localhost
+  port: 9600
+
+application:
+  scheme: http
+  host: localhost
+  port: ${server.port}
+  contextPath: "/codelist-api"
+  access-log: true
+
+session:
+  timeout-mins: 10
+
+yti_codelist_public_api_service_elastic_host: ${environment.codelist-elastic.host}
+yti_codelist_public_api_service_elastic_port: ${environment.codelist-elastic.port}
+yti_codelist_public_api_service_elastic_cluster: ${environment.codelist-elastic.cluster}
+
+---
+spring:
+  profiles: docker
+
+service:
+  name: yti-codelist-public-api-service
+
+server:
+  port: 9601
+
+frontend:
+  scheme: http
+  host: localhost
+  port: 9600
+
+application:
+  scheme: http
+  host: localhost
+  port: ${server.port}
+  contextPath: "/codelist-api"
+  access-log: true
+
+session:
+  timeout-mins: 10
+
+yti_codelist_public_api_service_elastic_host: ${environment.codelist-elastic.host}
+yti_codelist_public_api_service_elastic_port: ${environment.codelist-elastic.port}
+yti_codelist_public_api_service_elastic_cluster: ${environment.codelist-elastic.cluster}

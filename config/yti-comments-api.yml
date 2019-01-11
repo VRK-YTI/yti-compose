@@ -1,0 +1,125 @@
+---
+spring:
+  profiles: local
+
+service:
+  name: yti-comments-api
+  database-name: yti_comments
+
+server:
+  port: 9701
+
+tomcat:
+  ajp:
+    port: 9702
+
+fake:
+  login:
+    allowed: true
+    mail: "john.doe@example.com"
+    firstName: "John"
+    lastName: "Doe"
+
+impersonate:
+  allowed: true
+
+groupmanagement:
+  url: "https://rhp-dev.suomi.fi"
+  publicUrl: "https://rhp-dev.suomi.fi"
+
+codelist:
+  url: "http://yti-codelist-public-api-service:9601"
+  publicUrl: "http://localhost:9601"
+
+terminology:
+  url: "http://yti-terminology-api:9103"
+  publicUrl: "http://localhost:9100"
+
+datamodel:
+  url: "http://yti-datamodel-api:8009"
+  publicUrl: "http://localhost:9001"
+
+application:
+  scheme: http
+  host: localhost
+  port: ${server.port}
+  contextPath: "/comments-api"
+  access-log: true
+  env: local
+
+uri_suomi:
+  scheme: http
+  host: uri.suomi.fi
+
+session:
+  timeout-mins: 10
+
+hikari:
+  jdbcUrl: jdbc:postgresql://${environment.postgres.host}:${environment.postgres.port}/${service.database-name}
+  username: postgres
+  password:
+  minimumIdle: 10
+  maximumPoolSize: 10
+
+---
+spring:
+  profiles: docker
+
+service:
+  name: yti-comments-api
+  database-name: yti_comments
+
+server:
+  port: 9701
+
+tomcat:
+  ajp:
+    port: 9702
+
+fake:
+  login:
+    allowed: true
+    mail: "john.doe@example.com"
+    firstName: "John"
+    lastName: "Doe"
+
+impersonate:
+  allowed: true
+
+groupmanagement:
+  url: "http://yti-groupmanagement:8002"
+  publicUrl: "http://localhost:9302"
+
+codelist:
+  url: "http://yti-codelist-public-api-service:9601"
+  publicUrl: "http://localhost:9601"
+
+terminology:
+  url: "http://yti-terminology-api:9103"
+  publicUrl: "http://localhost:9100"
+
+datamodel:
+  url: "http://yti-datamodel-api:8009"
+  publicUrl: "http://localhost:9001"
+
+application:
+  scheme: http
+  host: localhost
+  port: ${server.port}
+  contextPath: "/comments-api"
+  access-log: true
+  env: local
+
+uri_suomi:
+  scheme: http
+  host: uri.suomi.fi
+
+session:
+  timeout-mins: 10
+
+hikari:
+  jdbcUrl: jdbc:postgresql://${environment.postgres.host}:${environment.postgres.port}/${service.database-name}
+  username: postgres
+  password:
+  minimumIdle: 10
+  maximumPoolSize: 10

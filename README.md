@@ -1,10 +1,25 @@
-# YTI docker compose tooling for setting up the local environment and running all the Y-applications
+# YTI docker compose tooling and Spring application configurations for setting up the local environment and running all the Y-applications
 
 This repository contains docker-compose file that helps setting up the YTI multi-container environment easily.
 
 ## Description
 
 The docker-compose.yml file has the full environment setup. This file uses docker-compose format version 3.
+
+# YTI platform shared configuration
+
+## Spring configuration profiles
+
+For your local development machine it makes sense to add:
+`export SPRING_PROFILES_ACTIVE=local`
+to your ~/.bashrc or ~/.bash_profile.
+
+ * default
+    - Default profile that is inherited by all other profiles.
+ * local
+    - For IDE and other local use.
+ * docker
+    - For use by docker-compose.
 
 ## Prerequisities
 

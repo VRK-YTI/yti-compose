@@ -1,0 +1,113 @@
+---
+spring:
+  profiles: local
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 30MB
+      max-request-size: 30MB
+  activemq:
+    broker-url: "tcp://localhost:61616"
+    user: yti
+    password: "test"
+
+tomcat:
+  ajp:
+    port: 9090
+
+server:
+  port: 8001
+
+search:
+  host:
+    url: yti-terminology-elasticsearch
+    port: 9200
+    scheme: http
+
+api:
+  url: http://yti-terminology-termed-api:8080/api
+  user: admin
+  pw: admin
+
+groupmanagement:
+  url: "https://rhp-dev.suomi.fi"
+  public:
+    url: "https://rhp-dev.suomi.fi"
+
+fake:
+  login:
+    allowed: true
+    mail: "john.doe@example.com"
+    firstName: "John"
+    lastName: "Doe"
+
+impersonate:
+  allowed: true
+
+migration:
+  enabled: true
+
+notify:
+  hook:
+    url: http://yti-terminology-api:8001/notify
+
+application:
+  public:
+    url: https://sanastot-dev.suomi.fi
+
+---
+spring:
+  profiles: docker
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 30MB
+      max-request-size: 30MB
+  activemq:
+    broker-url: "tcp://yti-activemq:61616"
+    user: yti
+    password: "test"
+
+tomcat:
+  ajp:
+    port: 9090
+
+server:
+  port: 8001
+
+search:
+  host:
+    url: yti-terminology-elasticsearch
+    port: 9200
+    scheme: http
+
+api:
+  url: http://yti-terminology-termed-api:8080/api
+  user: admin
+  pw: admin
+
+groupmanagement:
+  url: "http://yti-groupmanagement:8002"
+  public:
+    url: "http://localhost:9602"
+
+fake:
+  login:
+    allowed: true
+    mail: "john.doe@example.com"
+    firstName: "John"
+    lastName: "Doe"
+
+impersonate:
+  allowed: true
+
+migration:
+  enabled: true
+
+notify:
+  hook:
+    url: http://yti-terminology-api:8001/notify
+
+application:
+  public:
+    url: https://sanastot-dev.suomi.fi

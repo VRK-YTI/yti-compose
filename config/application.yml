@@ -1,0 +1,58 @@
+---
+spring:
+  profiles: local
+  jpa:
+    #show-sql: true
+    generate-ddl: false
+    properties:
+      hibernate:
+        ddl-auto: none
+
+management:
+  # Set management port to 10000 + server.port (i.e. e.g. if server.port = 9601, management port = 19601).
+  port: 1${server.port}
+
+thread:
+  pool:
+    idle-timeout: 10000
+    max: 50
+    min: 10
+
+environment:
+  codelist-elastic:
+    host: 127.0.0.1
+    port: 9300
+    cluster: yti-codelist-elasticsearch
+  postgres:
+    host: 127.0.0.1
+    port: 5432
+
+---
+spring:
+  profiles: docker
+  jpa:
+    #show-sql: true
+    generate-ddl: false
+    properties:
+      hibernate:
+        ddl-auto: none
+
+management:
+  # Set management port to 10000 + server.port (i.e. e.g. if server.port = 9601, management port = 19601).
+  port: 1${server.port}
+
+thread:
+  pool:
+    idle-timeout: 10000
+    max: 50
+    min: 10
+
+environment:
+  codelist-elastic:
+    host: yti-codelist-elasticsearch
+    port: 9300
+    cluster: yti-codelist-elasticsearch
+  postgres:
+    host: yti-postgres
+    port: 5432
+
