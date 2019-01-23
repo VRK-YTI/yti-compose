@@ -79,14 +79,20 @@ services:
   # CODELIST
 
   yti-codelist-elasticsearch:
-    image: yti-codelist-elasticsearch:latest
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     container_name: yti-codelist-elasticsearch
     restart: always
-    environment:
-     - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
     ports:
      - "9610:9200"
      - "9611:9300"
+    environment:
+     - xpack.security.enabled=false
+     - cluster.name=yti-codelist-elasticsearch
+     - http.host=0.0.0.0
+     - transport.host=0.0.0.0
+     - network.publish_host=127.0.0.1
+     - discovery.type=single-node
+     - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
     networks:
      - yti-network
 

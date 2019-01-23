@@ -21,7 +21,7 @@ thread:
 environment:
   codelist-elastic:
     host: 127.0.0.1
-    port: 9300
+    port: 9611
     cluster: yti-codelist-elasticsearch
   postgres:
     host: 127.0.0.1
