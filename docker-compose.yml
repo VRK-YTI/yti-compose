@@ -65,7 +65,7 @@ services:
      - "9302:8002"
      - "9300:9090"
     volumes:
-     - ../yti-local-config:/config
+     - ./config:/config
     environment:
      - "SPRING_PROFILES_ACTIVE=docker"
      - "SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-groupmanagement.yml"
@@ -121,7 +121,7 @@ services:
      - "9603:9603"
      - "19602:19602"
     volumes:
-     - ../yti-local-config:/config
+     - ./config:/config
      - /tmp/data/yti/yti-codelist-intake:/data/yti/yti-codelist-intake
     command: -j -Xmx2048M -a --spring.profiles.active=default,docker --spring.config.location=/config/application.yml,/config/yti-codelist-content-intake-service.yml
     depends_on:
@@ -143,7 +143,7 @@ services:
      - "9601:9601"
      - "19601:19601"
     volumes:
-     - ../yti-local-config:/config
+     - ./config:/config
      - /tmp/data/yti/yti-codelist-api:/data/yti/yti-codelist-api
      - /data/logs/yti-codelist-api:/data/logs/yti-codelist-api:Z
     command: -j -Xmx512M -a --spring.profiles.active=default,docker --spring.config.location=/config/application.yml,/config/yti-codelist-public-api-service.yml
@@ -166,7 +166,7 @@ services:
     ports:
      - "9102:8080"
     volumes:
-     - ../yti-local-config:/config:Z
+     - ./config:/config:Z
      - /data/logs/yti-terminology-termed-api:/data/logs/yti-terminology-termed-api:Z
     depends_on:
      - yti-postgres
@@ -200,7 +200,7 @@ services:
      - "9101:9090"
      - "9103:8001"
     volumes:
-     - ../yti-local-config:/config:Z
+     - ./config:/config:Z
      - /data/logs/yti-terminology-api:/data/logs/yti-terminology-api:Z
     depends_on:
      - yti-groupmanagement
@@ -279,7 +279,7 @@ services:
      - SPRING_PROFILES_ACTIVE=docker
      - SPRING_CONFIG_LOCATION=/config/yti-datamodel-api.yml
     volumes:
-     - ../yti-local-config:/config:Z
+     - ./config:/config:Z
      - /data/logs/yti-datamodel-api:/data/logs/yti-datamodel-api:Z
     depends_on:
      - yti-fuseki
@@ -314,7 +314,7 @@ services:
     ports:
      - "9701:9701"
     volumes:
-     - ../yti-local-config:/config
+     - ./config:/config
      - /data/logs/yti-datamodel-api:/data/logs/yti-comments-api:Z
     command: -j -Xmx2048M -a --spring.profiles.active=default,docker --spring.config.location=/config/application.yml,/config/yti-comments-api.yml
     depends_on:
