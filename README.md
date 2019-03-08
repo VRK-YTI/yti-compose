@@ -40,8 +40,10 @@ export SPRING_PROFILES_ACTIVE=local
 #### Generic artifacts
 
 #### YTI Spring Security
+
 ```
 cd yti-spring-security
+git checkout tags/v.0.1.2
 ./gradlew publishToMavenLocal
 cd ..
 ```
