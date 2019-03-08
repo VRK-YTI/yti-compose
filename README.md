@@ -40,8 +40,10 @@ export SPRING_PROFILES_ACTIVE=local
 #### Generic artifacts
 
 #### YTI Spring Security
+
 ```
 cd yti-spring-security
+git checkout tags/v.0.1.2
 ./gradlew publishToMavenLocal
 cd ..
 ```
@@ -49,6 +51,7 @@ cd ..
 ### YTI Spring Migration
 ```
 cd yti-spring-migration
+git checkout tags/v0.1.3
 ./gradlew publishToMavenLocal
 cd ..
 ```
@@ -83,18 +86,11 @@ cd yti-codelist-content-intake-service
 cd ..
 ```
 
-#### Codelist ElasticSearch
-```
-cd yti-codelist-elasticsearch
-./build.sh
-cd ..
-```
-
 #### Terminology
 
 #### Terminology Termed API
 ```
-cd yti-terminology-termed-api
+cd yti-terminology-termed-docker
 ./build.sh
 cd ..
 ```
