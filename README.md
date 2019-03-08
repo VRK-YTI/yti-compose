@@ -90,7 +90,7 @@ cd ..
 
 #### Terminology Termed API
 ```
-cd yti-terminology-termed-api
+cd yti-terminology-termed-docker
 ./build.sh
 cd ..
 ```
