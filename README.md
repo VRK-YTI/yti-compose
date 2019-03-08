@@ -85,13 +85,6 @@ cd yti-codelist-content-intake-service
 cd ..
 ```
 
-#### Codelist ElasticSearch
-```
-cd yti-codelist-elasticsearch
-./build.sh
-cd ..
-```
-
 #### Terminology
 
 #### Terminology Termed API
