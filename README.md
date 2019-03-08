@@ -23,9 +23,20 @@ to your ~/.bashrc or ~/.bash_profile.
 
 ## Prerequisities
 
-Docker installation is necessary, and if your OS variant does not contain docker-compose, it needs to be installed separately.
+### Gradle
 
-NOTE:
+Install gradle (Tested with 4.2)
+
+### Maven
+
+Install maven (Tested with 3.5.2)
+
+### Docker
+
+Install docker
+
+If your OS variant does not contain docker-compose, it needs to be installed separately.
+
 Docker defaults to 2 GB memory, this needs to be changed to a minumum of 4++ GB to avoid OOM issues and containers crashing. You do not need to run all the containers at once, and can run for example only one single selected application.
 
 ## Setting up the environment
@@ -34,6 +45,10 @@ Docker defaults to 2 GB memory, this needs to be changed to a minumum of 4++ GB 
 ```
 export SPRING_PROFILES_ACTIVE=local
 ```
+
+### Cloning required repos
+
+Clone required repos manually or using [script](https://github.com/VRK-YTI/yti-compose/blob/master/src/script/bootstrap.sh). Script clones all of the required repos to the current directory.
 
 ### Building components using command line
 
