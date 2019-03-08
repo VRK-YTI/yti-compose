@@ -51,6 +51,7 @@ cd ..
 ### YTI Spring Migration
 ```
 cd yti-spring-migration
+git checkout tags/v0.1.3
 ./gradlew publishToMavenLocal
 cd ..
 ```
