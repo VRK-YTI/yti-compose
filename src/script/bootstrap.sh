@@ -6,6 +6,7 @@ components="yti-spring-security
 yti-spring-migration
 yti-codelist-common-model
 yti-docker-java-base
+yti-config-server
 yti-codelist-public-api-service
 yti-codelist-content-intake-service
 yti-codelist-ui
