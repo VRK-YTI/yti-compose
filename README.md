@@ -177,7 +177,7 @@ cd ..
 cd yti-postgres
 ./build.sh
 cd ..
-cd yti-codelist-compose
+cd yti-compose
 docker-compose up -d yti-postgres
 ```
 
