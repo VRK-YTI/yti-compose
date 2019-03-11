@@ -54,6 +54,14 @@ Clone required repos manually or using [script](https://github.com/VRK-YTI/yti-c
 
 #### Generic artifacts
 
+#### YTI ActiveMQ
+
+```
+cd yti-activemq
+./build.sh
+cd ..
+```
+
 #### YTI Spring Security
 
 ```
@@ -63,7 +71,7 @@ git checkout tags/v.0.1.2
 cd ..
 ```
 
-### YTI Spring Migration
+#### YTI Spring Migration
 ```
 cd yti-spring-migration
 git checkout tags/v0.1.3
