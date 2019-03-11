@@ -8,6 +8,7 @@ yti-codelist-common-model
 yti-docker-java-base
 yti-codelist-public-api-service
 yti-codelist-content-intake-service
+yti-codelist-ui
 yti-terminology-termed-docker
 yti-terminology-api
 yti-terminology-ui
