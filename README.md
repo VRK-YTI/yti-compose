@@ -101,6 +101,13 @@ cd yti-codelist-content-intake-service
 cd ..
 ```
 
+#### Codelist UI
+```
+cd yti-codelist-ui
+./build.sh
+cd ..
+```
+
 #### Terminology
 
 #### Terminology Termed API
