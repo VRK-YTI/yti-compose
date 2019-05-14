@@ -50,7 +50,7 @@ thread:
 environment:
   codelist-elastic:
     host: yti-codelist-elasticsearch
-    port: 9300
+    port: 9200
     cluster: yti-codelist-elasticsearch
   postgres:
     host: yti-postgres
