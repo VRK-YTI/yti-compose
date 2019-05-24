@@ -22,6 +22,41 @@ version: '3'
 
 services:
 
+  # KIBANA
+
+  yti-codelist-kibana:
+    image: docker.elastic.co/kibana/kibana:6.5.4
+    container_name: yti-kibana
+    restart: always
+    ports:
+     - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://yti-codelist-elasticsearch:9200
+    networks:
+     - yti-network
+
+  yti-terminology-kibana:
+    image: docker.elastic.co/kibana/kibana:6.5.4
+    container_name: yti-kibana
+    restart: always
+    ports:
+     - "5602:5601"
+    environment:
+      ELASTICSEARCH_URL: http://yti-terminology-elasticsearch:9200
+    networks:
+     - yti-network
+
+  yti-datamodel-kibana:
+    image: docker.elastic.co/kibana/kibana:6.5.4
+    container_name: yti-kibana
+    restart: always
+    ports:
+     - "5603:5601"
+    environment:
+      ELASTICSEARCH_URL: http://yti-datamodel-elasticsearch:9200
+    networks:
+     - yti-network
+
   # POSTGRES
 
   yti-postgres:
