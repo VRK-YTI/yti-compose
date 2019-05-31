@@ -41,7 +41,6 @@ application:
   contextPath: "/codelist-intake"
   access-log: true
   initializeContent: true
-  initializeTestContent: false
   env: local
 
 frontend:
@@ -116,7 +115,6 @@ application:
   contextPath: "/codelist-intake"
   access-log: true
   initializeContent: true
-  initializeTestContent: false
   env: local
 
 frontend:
