@@ -28,16 +28,16 @@ groupmanagement:
   publicUrl: "https://rhp-dev.suomi.fi"
 
 codelist:
-  url: "http://yti-codelist-public-api-service:9601"
-  publicUrl: "http://localhost:9601"
+  url: "https://koodistot-dev.suomi.fi"
+  publicUrl: "https://koodistot-dev.suomi.fi"
 
 terminology:
-  url: "http://yti-terminology-api:9103"
-  publicUrl: "http://localhost:9100"
+  url: "https://sanastot-dev.suomi.fi"
+  publicUrl: "https://sanastot-dev.suomi.fi"
 
 datamodel:
-  url: "http://yti-datamodel-api:8009"
-  publicUrl: "http://localhost:9001"
+  url: "https://tietomallit-dev.suomi.fi"
+  publicUrl: "https://tietomallit-dev.suomi.fi"
 
 application:
   scheme: http
