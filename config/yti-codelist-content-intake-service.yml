@@ -31,6 +31,9 @@ terminology:
   url: "https://sanastot-dev.suomi.fi"
   publicUrl: "https://sanastot-dev.suomi.fi"
 
+comments:
+  publicUrl: "https://kommentit-dev.suomi.fi"
+
 datamodel:
   publicUrl: "https://tietomallit-dev.suomi.fi"
 
