@@ -43,6 +43,7 @@ application:
   codeListUrl: https://koodistot-dev.suomi.fi/
   dataModelUrl: https://tietomallit-dev.suomi.fi/
   terminologyUrl: https://sanastot-dev.suomi.fi/
+  commentsUrl: https://kommentit-dev.suomi.fi/
   env: local
 
 fake:
@@ -100,6 +101,7 @@ application:
   codeListUrl: https://koodistot-dev.suomi.fi/
   dataModelUrl: https://tietomallit-dev.suomi.fi/
   terminologyUrl: https://sanastot-dev.suomi.fi/
+  commentsUrl: https://kommentit-dev.suomi.fi/
   env: local
 
 fake:

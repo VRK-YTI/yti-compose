@@ -34,6 +34,13 @@ groupmanagement:
   public:
     url: "https://rhp-dev.suomi.fi"
 
+services:
+  codeListUrl: https://koodistot-dev.suomi.fi
+  dataModelUrl: https://tietomallit-dev.suomi.fi
+  groupManagementUrl: https://rhp-dev.suomi.fi
+  commentsUrl: https://kommentit-dev.suomi.fi
+  env: local
+
 fake:
   login:
     allowed: true
@@ -90,6 +97,13 @@ groupmanagement:
   url: "http://yti-groupmanagement:8002"
   public:
     url: "http://localhost:9602"
+
+services:
+  codeListUrl: https://koodistot-dev.suomi.fi
+  dataModelUrl: https://tietomallit-dev.suomi.fi
+  groupManagementUrl: https://rhp-dev.suomi.fi
+  commentsUrl: https://kommentit-dev.suomi.fi
+  env: docker
 
 fake:
   login:
