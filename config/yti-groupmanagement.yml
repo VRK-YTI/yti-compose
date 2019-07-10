@@ -33,17 +33,17 @@ groupmanagement:
   url: http://localhost:8002
 
 environment:
-  url: https://rhp-dev.suomi.fi
+  url: https://rhp.dev.yticloud.vrk.fi
 
 send:
   admin:
     emails: false
 
 application:
-  codeListUrl: https://koodistot-dev.suomi.fi/
-  dataModelUrl: https://tietomallit-dev.suomi.fi/
-  terminologyUrl: https://sanastot-dev.suomi.fi/
-  commentsUrl: https://kommentit-dev.suomi.fi/
+  codeListUrl: https://koodistot.dev.yticloud.vrk.fi/
+  dataModelUrl: https://tietomallit.dev.yticloud.vrk.fi/
+  terminologyUrl: https://sanastot.dev.yticloud.vrk.fi/
+  commentsUrl: https://kommentit.dev.yticloud.vrk.fi/
   env: local
 
 fake:
@@ -91,17 +91,17 @@ groupmanagement:
   url: http://localhost:8002
 
 environment:
-  url: https://rhp-dev.suomi.fi
+  url: https://rhp.dev.yticloud.vrk.fi
 
 send:
   admin:
     emails: false
 
 application:
-  codeListUrl: https://koodistot-dev.suomi.fi/
-  dataModelUrl: https://tietomallit-dev.suomi.fi/
-  terminologyUrl: https://sanastot-dev.suomi.fi/
-  commentsUrl: https://kommentit-dev.suomi.fi/
+  codeListUrl: https://koodistot.dev.yticloud.vrk.fi/
+  dataModelUrl: https://tietomallit.dev.yticloud.vrk.fi/
+  terminologyUrl: https://sanastot.dev.yticloud.vrk.fi/
+  commentsUrl: https://kommentit.dev.yticloud.vrk.fi/
   env: local
 
 fake:

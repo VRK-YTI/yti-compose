@@ -16,23 +16,23 @@ endpoint: http://localhost:3030
 devMode: true
 defaultTermedAPI: http://localhost:9102/api/
 
-defaultGroupManagementAPI: https://rhp-dev.suomi.fi/public-api/
-publicGroupManagementAPI: https://rhp-dev.suomi.fi
-defaultSuomiCodeServerAPI: https://koodistot-dev.suomi.fi/codelist-api/api/v1/
+defaultGroupManagementAPI: https://rhp.dev.yticloud.vrk.fi/public-api/
+publicGroupManagementAPI: https://rhp.dev.yticloud.vrk.fi
+defaultSuomiCodeServerAPI: https://koodistot.dev.yticloud.vrk.fi/codelist-api/api/v1/
 defaultTermedAPIUser: admin
 defaultTermedAPIUserSecret: admin
-publicGroupManagementFrontend: https://rhp-dev.suomi.fi
-publicSuomiCodeServerFrontend: https://koodistot-dev.suomi.fi
+publicGroupManagementFrontend: https://rhp.dev.yticloud.vrk.fi
+publicSuomiCodeServerFrontend: https://koodistot.dev.yticloud.vrk.fi
 #defaultTerminologyAPI: http://yti-terminology-api:8001/
 defaultTerminologyAPI: http://localhost:9103/
-publicTerminologyFrontend: https://sanastot-dev.suomi.fi
-publicCommentsFrontend: https://kommentit-dev.suomi.fi
+publicTerminologyFrontend: https://sanastot.dev.yticloud.vrk.fi
+publicCommentsFrontend: https://kommentit.dev.yticloud.vrk.fi
 
 publicTermedAPI: http://localhost:9102/
 
 groupmanagement:
-  url: https://rhp-dev.suomi.fi
-  public.url: https://rhp-dev.suomi.fi
+  url: https://rhp.dev.yticloud.vrk.fi
+  public.url: https://rhp.dev.yticloud.vrk.fi
 
 env: local
 
@@ -64,21 +64,21 @@ devMode: true
 defaultTermedAPI: http://yti-terminology-termed-api:8080/api/
 
 defaultGroupManagementAPI: http://yti-groupmanagement:8002/public-api/
-publicGroupManagementAPI: https://rhp-dev.suomi.fi
-defaultSuomiCodeServerAPI: https://koodistot-dev.suomi.fi/codelist-api/api/v1/
+publicGroupManagementAPI: https://rhp.dev.yticloud.vrk.fi
+defaultSuomiCodeServerAPI: https://koodistot.dev.yticloud.vrk.fi/codelist-api/api/v1/
 defaultTermedAPIUser: admin
 defaultTermedAPIUserSecret: admin
-publicGroupManagementFrontend: https://rhp-dev.suomi.fi
-publicSuomiCodeServerFrontend: https://koodistot-dev.suomi.fi
+publicGroupManagementFrontend: https://.dev.yticloud.vrk.fi
+publicSuomiCodeServerFrontend: https://koodistot.dev.yticloud.vrk.fi
 defaultTerminologyAPI: http://yti-terminology-api:8001/
-publicTerminologyFrontend: https://sanastot-dev.suomi.fi
-publicCommentsFrontend: https://kommentit-dev.suomi.fi
+publicTerminologyFrontend: https://sanastot.dev.yticloud.vrk.fi
+publicCommentsFrontend: https://kommentit.dev.yticloud.vrk.fi
 
 publicTermedAPI: http://yti-terminology-termed-api/
 
 groupmanagement:
   url: http://yti-groupmanagement:8002
-  public.url: https://rhp-dev.suomi.fi
+  public.url: https://rhp.dev.yticloud.vrk.fi
 
 env: local
 

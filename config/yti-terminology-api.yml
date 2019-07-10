@@ -30,15 +30,15 @@ api:
   pw: admin
 
 groupmanagement:
-  url: "https://rhp-dev.suomi.fi"
+  url: "https://rhp.dev.yti.cloud.vrk.fi"
   public:
-    url: "https://rhp-dev.suomi.fi"
+    url: "https://rhp.dev.yti.cloud.vrk.fi"
 
 services:
-  codeListUrl: https://koodistot-dev.suomi.fi
-  dataModelUrl: https://tietomallit-dev.suomi.fi
-  groupManagementUrl: https://rhp-dev.suomi.fi
-  commentsUrl: https://kommentit-dev.suomi.fi
+  codeListUrl: https://koodistot.dev.yti.cloud.vrk.fi
+  dataModelUrl: https://tietomallit.dev.yti.cloud.vrk.fi
+  groupManagementUrl: https://rhp.dev.yti.cloud.vrk.fi
+  commentsUrl: https://kommentit.dev.yti.cloud.vrk.fi
   env: local
 
 fake:
@@ -60,7 +60,7 @@ notify:
 
 application:
   public:
-    url: https://sanastot-dev.suomi.fi
+    url: https://sanastot.dev.yticloud.vrk.fi
 
 ---
 spring:
@@ -99,10 +99,10 @@ groupmanagement:
     url: "http://localhost:9602"
 
 services:
-  codeListUrl: https://koodistot-dev.suomi.fi
-  dataModelUrl: https://tietomallit-dev.suomi.fi
-  groupManagementUrl: https://rhp-dev.suomi.fi
-  commentsUrl: https://kommentit-dev.suomi.fi
+  codeListUrl: https://koodistot.dev.yticloud.vrk.fi
+  dataModelUrl: https://tietomallit.dev.yticloud.vrk.fi
+  groupManagementUrl: https://rhp.dev.yticloud.vrk.fi
+  commentsUrl: https://kommentit.dev.yticloud.vrk.fi
   env: docker
 
 fake:
@@ -124,4 +124,4 @@ notify:
 
 application:
   public:
-    url: https://sanastot-dev.suomi.fi
+    url: https://sanastot.dev.yticloud.vrk.fi

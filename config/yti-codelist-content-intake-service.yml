@@ -24,18 +24,18 @@ impersonate:
   allowed: true
 
 groupmanagement:
-  url: "https://rhp-dev.suomi.fi"
-  publicUrl: "https://rhp-dev.suomi.fi"
+  url: "https://rhp.dev.yti.cloud.vrk.fi"
+  publicUrl: "https://rhp.dev.yti.cloud.vrk.fi"
 
 terminology:
-  url: "https://sanastot-dev.suomi.fi"
-  publicUrl: "https://sanastot-dev.suomi.fi"
+  url: "https://sanastot.dev.yti.cloud.vrk.fi"
+  publicUrl: "https://sanastot.dev.yti.cloud.vrk.fi"
 
 comments:
-  publicUrl: "https://kommentit-dev.suomi.fi"
+  publicUrl: "https://kommentit.dev.yti.cloud.vrk.fi"
 
 datamodel:
-  publicUrl: "https://tietomallit-dev.suomi.fi"
+  publicUrl: "https://tietomallit.dev.yti.cloud.vrk.fi"
 
 application:
   scheme: http
@@ -105,11 +105,11 @@ groupmanagement:
   publicUrl: "http://localhost:9302"
 
 terminology:
-  url: "https://sanastot-dev.suomi.fi"
-  publicUrl: "https://sanastot-dev.suomi.fi"
+  url: "https://sanastot.dev.yticloud.vrk.fi"
+  publicUrl: "https://sanastot.dev.yticloud.vrk.fi"
 
 datamodel:
-  publicUrl: "https://tietomallit-dev.suomi.fi"
+  publicUrl: "https://tietomallit.dev.yticloud.vrk.fi"
 
 application:
   scheme: http

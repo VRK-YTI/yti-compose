@@ -24,20 +24,20 @@ impersonate:
   allowed: true
 
 groupmanagement:
-  url: "https://rhp-dev.suomi.fi"
-  publicUrl: "https://rhp-dev.suomi.fi"
+  url: "https://rhp.dev.yticloud.vrk.fi"
+  publicUrl: "https://rhp.dev.yti.cloud.vrk.fi"
 
 codelist:
-  url: "https//koodistot-dev.suomi.fi"
-  publicUrl: "https://koodistot-dev.suomi.fi"
+  url: "https//koodistot.dev.yticloud.vrk.fi"
+  publicUrl: "https://koodistot.dev.yticloud.vrk.fi"
 
 terminology:
-  url: "https://sanastot-dev.suomi.fi"
-  publicUrl: "https://sanastot-dev.suomi.fi"
+  url: "https://sanastot.dev.yticloud.vrk.fi"
+  publicUrl: "https://sanastot.dev.yticloud.vrk.fi"
 
 datamodel:
-  url: "https://tietomallit-dev.suomi.fi"
-  publicUrl: "https://tietomallit-dev.suomi.fi"
+  url: "https://tietomallit.dev.yticloud.vrk.fi"
+  publicUrl: "https://tietomallit.dev.yticloud.vrk.fi"
 
 application:
   scheme: http
