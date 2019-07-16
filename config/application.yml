@@ -4,6 +4,7 @@ spring:
   jpa:
     #show-sql: true
     generate-ddl: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     properties:
       hibernate:
         ddl-auto: none
@@ -22,10 +23,41 @@ environment:
   codelist-elastic:
     host: 127.0.0.1
     port: 9610
-    cluster: yti-codelist-elasticsearch
+  datamodel-elastic:
+    host: 127.0.0.1
+    port: 9002
+  terminology-elastic:
+    host: 127.0.0.1
+    port: 9104
+  activemq:
+    host: 127.0.0.1
+    port: 9901
+  fuseki:
+    host: 127.0.0.1
+    port: 3030
+  termed-api:
+    host: yti-terminology-termed-api
+    port: 9102
+    ajp: 9103
   postgres:
     host: 127.0.0.1
     port: 5432
+  codelist:
+    public-host: koodistot.dev.yti.cloud.vrk.fi
+    public-url: https://${environment.codelist.public-host}
+    api-url: http://yti-codelist-public-api-service:9601
+  terminology:
+    public-url: https://sanastot.dev.yti.cloud.vrk.fi
+    url: http://yti-terminology-api:9103
+  datamodel:
+    public-url: https://tietomallit.dev.yti.cloud.vrk.fi
+    url: http://yti-datamodel-api:9004
+  groupmanagement:
+    public-url: https://rhp.dev.yti.cloud.vrk.fi
+    url: https://rhp.dev.yti.cloud.vrk.fi
+  comments:
+    public-host: kommentit.dev.yti.cloud.vrk.fi
+    public-url: https://${environment.comments.public-host}
 
 ---
 spring:
@@ -52,7 +84,38 @@ environment:
     host: yti-codelist-elasticsearch
     port: 9200
     cluster: yti-codelist-elasticsearch
+  datamodel-elastic:
+    host: yti-datamodel-elastic
+    port: 9200
+  terminology-elastic:
+    host: yti-terminology-elasticsearch
+    port: 9200
+  activemq:
+    host: yti-activemq
+    port: 61616
+  fuseki:
+    host: yti-fuseki
+    port: 3030
+  termed-api:
+    host: yti-terminology-termed-api
+    port: 9102
+    ajp: 9103
   postgres:
     host: yti-postgres
     port: 5432
-
+  codelist:
+    public-host: koodistot.dev.yti.cloud.vrk.fi
+    public-url: https://${environment.codelist.public-host}
+    api-url: http://yti-codelist-public-api-service:9601
+  terminology:
+    public-url: https://sanastot.dev.yti.cloud.vrk.fi
+    url: http://yti-terminology-api:9103
+  datamodel:
+    public-url: https://tietomallit.dev.yti.cloud.vrk.fi
+    url: http://yti-datamodel-api:9004
+  groupmanagement:
+    public-url: https://rhp.dev.yti.cloud.vrk.fi
+    url: http://yti-groupmanagement:8002
+  comments:
+    public-host: kommentit.dev.yti.cloud.vrk.fi
+    public-url: https://${environment.comments.public-host}

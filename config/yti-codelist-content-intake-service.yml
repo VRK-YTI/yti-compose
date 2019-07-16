@@ -13,29 +13,19 @@ tomcat:
   ajp:
     port: 9603
 
-fake:
-  login:
-    allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
-
-impersonate:
-  allowed: true
-
 groupmanagement:
-  url: "https://rhp.dev.yti.cloud.vrk.fi"
-  publicUrl: "https://rhp.dev.yti.cloud.vrk.fi"
+  url: ${environment.groupmanagement.url}
+  publicUrl: ${environment.groupmanagement.public-url}
 
 terminology:
-  url: "https://sanastot.dev.yti.cloud.vrk.fi"
-  publicUrl: "https://sanastot.dev.yti.cloud.vrk.fi"
-
-comments:
-  publicUrl: "https://kommentit.dev.yti.cloud.vrk.fi"
+  url: ${environment.terminology.url}
+  publicUrl: ${environment.terminology.public-url}
 
 datamodel:
-  publicUrl: "https://tietomallit.dev.yti.cloud.vrk.fi"
+  publicUrl: ${environment.datamodel.public-url}
+
+comments:
+  publicUrl: ${environment.comments.public-url}
 
 application:
   scheme: http
@@ -74,6 +64,16 @@ hikari:
 yti_codelist_content_intake_service_elastic_host: ${environment.codelist-elastic.host}
 yti_codelist_content_intake_service_elastic_port: ${environment.codelist-elastic.port}
 yti_codelist_content_intake_service_elastic_cluster: ${environment.codelist-elastic.cluster}
+
+impersonate:
+  allowed: true
+
+fake:
+  login:
+    allowed: true
+    mail: "john.doe@example.com"
+    firstName: "John"
+    lastName: "Doe"
 
 ---
 spring:
@@ -90,26 +90,19 @@ tomcat:
   ajp:
     port: 9603
 
-fake:
-  login:
-    allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
-
-impersonate:
-  allowed: true
-
 groupmanagement:
-  url: "http://yti-groupmanagement:8002"
-  publicUrl: "http://localhost:9302"
+  url: ${environment.groupmanagement.url}
+  publicUrl: ${environment.groupmanagement.public-url}
 
 terminology:
-  url: "https://sanastot.dev.yticloud.vrk.fi"
-  publicUrl: "https://sanastot.dev.yticloud.vrk.fi"
+  url: ${environment.terminology.url}
+  publicUrl: ${environment.terminology.public-url}
 
 datamodel:
-  publicUrl: "https://tietomallit.dev.yticloud.vrk.fi"
+  publicUrl: ${environment.datamodel.public-url}
+
+comments:
+  publicUrl: ${environment.comments.public-url}
 
 application:
   scheme: http
@@ -148,3 +141,14 @@ hikari:
 yti_codelist_content_intake_service_elastic_host: ${environment.codelist-elastic.host}
 yti_codelist_content_intake_service_elastic_port: ${environment.codelist-elastic.port}
 yti_codelist_content_intake_service_elastic_cluster: ${environment.codelist-elastic.cluster}
+
+impersonate:
+  allowed: true
+
+fake:
+  login:
+    allowed: true
+    mail: "john.doe@example.com"
+    firstName: "John"
+    lastName: "Doe"
+

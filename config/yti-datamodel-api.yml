@@ -6,33 +6,30 @@ tomcat:
   ajp:
     port: 8009
 
-elasticHost: localhost
-elasticPort: 9003
-elasticCluster: yti-datamodel-elasticsearch
+elasticHost: ${environment.datamodel-elastic.host}
+elasticPort: ${environment.datamodel-elastic.port}
+elasticHttpScheme: http
 
-#endpoint: http://yti-fuseki:3030
 endpoint: http://localhost:3030
 
 devMode: true
-defaultTermedAPI: http://localhost:9102/api/
+defaultTermedAPI: http://${environment.termed-api.host}:${environment.termed-api.port}/api/
 
-defaultGroupManagementAPI: https://rhp.dev.yticloud.vrk.fi/public-api/
-publicGroupManagementAPI: https://rhp.dev.yticloud.vrk.fi
-defaultSuomiCodeServerAPI: https://koodistot.dev.yticloud.vrk.fi/codelist-api/api/v1/
+defaultGroupManagementAPI: ${environment.groupmanagement.url}/public-api/
+publicGroupManagementAPI: ${environment.groupmanagement.public-url}
+defaultSuomiCodeServerAPI: ${environment.codelist.public-url}/codelist-api/api/v1/
 defaultTermedAPIUser: admin
 defaultTermedAPIUserSecret: admin
-publicGroupManagementFrontend: https://rhp.dev.yticloud.vrk.fi
-publicSuomiCodeServerFrontend: https://koodistot.dev.yticloud.vrk.fi
-#defaultTerminologyAPI: http://yti-terminology-api:8001/
-defaultTerminologyAPI: http://localhost:9103/
-publicTerminologyFrontend: https://sanastot.dev.yticloud.vrk.fi
-publicCommentsFrontend: https://kommentit.dev.yticloud.vrk.fi
-
-publicTermedAPI: http://localhost:9102/
+publicGroupManagementFrontend: ${environment.groupmanagement.public-url}
+publicSuomiCodeServerFrontend: ${environment.codelist.public-url}
+defaultTerminologyAPI: ${environment.terminology.url}/
+publicTerminologyFrontend: ${environment.terminology.public-url}
+publicCommentsFrontend: ${environment.comments.public-url}
+publicTermedAPI: ${environment.terminology.public-url}/termed-api/
 
 groupmanagement:
-  url: https://rhp.dev.yticloud.vrk.fi
-  public.url: https://rhp.dev.yticloud.vrk.fi
+  url: ${environment.groupmanagement.url}
+  public.url: ${environment.groupmanagement.public-url}
 
 env: local
 
@@ -54,31 +51,30 @@ tomcat:
   ajp:
     port: 8009
 
-elasticHost: yti-datamodel-elasticsearch
-elasticPort: 9300
-elasticCluster: yti-datamodel-elasticsearch
+elasticHost: ${environment.datamodel-elastic.host}
+elasticPort: ${environment.datamodel-elastic.port}
+elasticHttpScheme: http
 
 endpoint: http://yti-fuseki:3030
 
 devMode: true
-defaultTermedAPI: http://yti-terminology-termed-api:8080/api/
+defaultTermedAPI: http://${environment.termed-api.host}:${environment.termed-api.port}/api/
 
-defaultGroupManagementAPI: http://yti-groupmanagement:8002/public-api/
-publicGroupManagementAPI: https://rhp.dev.yticloud.vrk.fi
-defaultSuomiCodeServerAPI: https://koodistot.dev.yticloud.vrk.fi/codelist-api/api/v1/
+defaultGroupManagementAPI: ${environment.groupmanagement.url}/public-api/
+publicGroupManagementAPI: ${environment.groupmanagement.public-url}
+defaultSuomiCodeServerAPI: ${environment.codelist.public-url}/codelist-api/api/v1/
 defaultTermedAPIUser: admin
 defaultTermedAPIUserSecret: admin
-publicGroupManagementFrontend: https://.dev.yticloud.vrk.fi
-publicSuomiCodeServerFrontend: https://koodistot.dev.yticloud.vrk.fi
-defaultTerminologyAPI: http://yti-terminology-api:8001/
-publicTerminologyFrontend: https://sanastot.dev.yticloud.vrk.fi
-publicCommentsFrontend: https://kommentit.dev.yticloud.vrk.fi
-
-publicTermedAPI: http://yti-terminology-termed-api/
+publicGroupManagementFrontend: ${environment.groupmanagement.public-url}
+publicSuomiCodeServerFrontend: ${environment.codelist.public-url}
+defaultTerminologyAPI: ${environment.terminology.url}/
+publicTerminologyFrontend: ${environment.terminology.public-url}
+publicCommentsFrontend: ${environment.comments.public-url}
+publicTermedAPI: ${environment.terminology.public-url}/termed-api/
 
 groupmanagement:
-  url: http://yti-groupmanagement:8002
-  public.url: https://rhp.dev.yticloud.vrk.fi
+  url: ${environment.groupmanagement.url}
+  public.url: ${environment.groupmanagement.public-url}
 
 env: local
 

@@ -30,20 +30,20 @@ registration:
   url: https://registration.eduuni.fi
 
 groupmanagement:
-  url: http://localhost:8002
+  url: ${environment.groupmanagement.url}
 
 environment:
-  url: https://rhp.dev.yticloud.vrk.fi
+  url: ${environment.groupmanagement.public-url}
 
 send:
   admin:
     emails: false
 
 application:
-  codeListUrl: https://koodistot.dev.yticloud.vrk.fi/
-  dataModelUrl: https://tietomallit.dev.yticloud.vrk.fi/
-  terminologyUrl: https://sanastot.dev.yticloud.vrk.fi/
-  commentsUrl: https://kommentit.dev.yticloud.vrk.fi/
+  codeListUrl: ${environment.codelist.public-url}
+  dataModelUrl: ${environment.datamodel.public-url}
+  terminologyUrl: ${environment.terminology.public-url}
+  commentsUrl: ${environment.comments.public-url}
   env: local
 
 fake:
@@ -88,20 +88,20 @@ registration:
   url: https://registration.eduuni.fi
 
 groupmanagement:
-  url: http://localhost:8002
+  url: ${environment.groupmanagement.url}
 
 environment:
-  url: https://rhp.dev.yticloud.vrk.fi
+  url: ${environment.groupmanagement.public-url}
 
 send:
   admin:
     emails: false
 
 application:
-  codeListUrl: https://koodistot.dev.yticloud.vrk.fi/
-  dataModelUrl: https://tietomallit.dev.yticloud.vrk.fi/
-  terminologyUrl: https://sanastot.dev.yticloud.vrk.fi/
-  commentsUrl: https://kommentit.dev.yticloud.vrk.fi/
+  codeListUrl: ${environment.codelist.public-url}
+  dataModelUrl: ${environment.datamodel.public-url}
+  terminologyUrl: ${environment.terminology.public-url}
+  commentsUrl: ${environment.comments.public-url}
   env: local
 
 fake:

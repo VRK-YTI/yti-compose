@@ -7,7 +7,7 @@ spring:
       max-file-size: 30MB
       max-request-size: 30MB
   activemq:
-    broker-url: "tcp://localhost:61616"
+    broker-url: "tcp://${environment.activemq.host}:${environment.activemq.port}"
     user: yti
     password: "test"
 
@@ -20,33 +20,30 @@ server:
 
 search:
   host:
-    url: yti-terminology-elasticsearch
-    port: 9200
+    url: ${environment.terminology-elastic.host}
+    port: ${environment.terminology-elastic.port}
     scheme: http
 
 api:
-  url: http://yti-terminology-termed-api:8080/api
+  url: http://${environment.termed-api.host}:${environment.termed-api.port}/api
   user: admin
   pw: admin
 
 groupmanagement:
-  url: "https://rhp.dev.yti.cloud.vrk.fi"
+  url: ${environment.groupmanagement.url}
   public:
-    url: "https://rhp.dev.yti.cloud.vrk.fi"
+    url: ${environment.groupmanagement.public-url}
+
+notify:
+  hook:
+    url: ${environment.terminology.url}/notify
 
 services:
-  codeListUrl: https://koodistot.dev.yti.cloud.vrk.fi
-  dataModelUrl: https://tietomallit.dev.yti.cloud.vrk.fi
-  groupManagementUrl: https://rhp.dev.yti.cloud.vrk.fi
-  commentsUrl: https://kommentit.dev.yti.cloud.vrk.fi
+  codeListUrl: ${environment.codelist.public-url}
+  dataModelUrl: ${environment.datamodel.public-url}
+  groupManagementUrl: ${environment.groupmanagement.public-url}
+  commentsUrl: ${environment.comments.public-url}
   env: local
-
-fake:
-  login:
-    allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
 
 impersonate:
   allowed: true
@@ -54,13 +51,16 @@ impersonate:
 migration:
   enabled: true
 
-notify:
-  hook:
-    url: http://yti-terminology-api:8001/notify
-
 application:
   public:
-    url: https://sanastot.dev.yticloud.vrk.fi
+    url: ${environment.terminology.public-url}
+
+fake:
+  login:
+    allowed: true
+    mail: "john.doe@example.com"
+    firstName: "John"
+    lastName: "Doe"
 
 ---
 spring:
@@ -71,7 +71,7 @@ spring:
       max-file-size: 30MB
       max-request-size: 30MB
   activemq:
-    broker-url: "tcp://yti-activemq:61616"
+    broker-url: "tcp://${environment.activemq.host}:${environment.activemq.port}"
     user: yti
     password: "test"
 
@@ -84,26 +84,40 @@ server:
 
 search:
   host:
-    url: yti-terminology-elasticsearch
-    port: 9200
+    url: ${environment.terminology-elastic.host}
+    port: ${environment.terminology-elastic.port}
     scheme: http
 
 api:
-  url: http://yti-terminology-termed-api:8080/api
+  url: http://${environment.termed-api.host}:${environment.termed-api.port}/api
   user: admin
   pw: admin
 
 groupmanagement:
-  url: "http://yti-groupmanagement:8002"
+  url: ${environment.groupmanagement.url}
   public:
-    url: "http://localhost:9602"
+    url: ${environment.groupmanagement.public-url}
+
+notify:
+  hook:
+    url: ${environment.terminology.url}/notify
 
 services:
-  codeListUrl: https://koodistot.dev.yticloud.vrk.fi
-  dataModelUrl: https://tietomallit.dev.yticloud.vrk.fi
-  groupManagementUrl: https://rhp.dev.yticloud.vrk.fi
-  commentsUrl: https://kommentit.dev.yticloud.vrk.fi
+  codeListUrl: ${environment.codelist.public-url}
+  dataModelUrl: ${environment.datamodel.public-url}
+  groupManagementUrl: ${environment.groupmanagement.public-url}
+  commentsUrl: ${environment.comments.public-url}
   env: docker
+
+impersonate:
+  allowed: true
+
+migration:
+  enabled: true
+
+application:
+  public:
+    url: ${environment.terminology.public-url}
 
 fake:
   login:
@@ -112,16 +126,3 @@ fake:
     firstName: "John"
     lastName: "Doe"
 
-impersonate:
-  allowed: true
-
-migration:
-  enabled: true
-
-notify:
-  hook:
-    url: http://yti-terminology-api:8001/notify
-
-application:
-  public:
-    url: https://sanastot.dev.yticloud.vrk.fi

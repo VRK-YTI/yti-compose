@@ -119,7 +119,6 @@ services:
     restart: always
     ports:
      - "9610:9200"
-     - "9611:9300"
     environment:
      - xpack.security.enabled=false
      - cluster.name=yti-codelist-elasticsearch
@@ -230,7 +229,7 @@ services:
     restart: always
     environment:
      - SPRING_PROFILES_ACTIVE=docker
-     - SPRING_CONFIG_LOCATION=/config/yti-terminology-api.yml
+     - SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-terminology-api.yml
     ports:
      - "9101:9090"
      - "9103:8001"
@@ -286,7 +285,6 @@ services:
     container_name: "yti-datamodel-elasticsearch"
     restart: always
     ports:
-     - "9003:9300"
      - "9002:9200"
     environment:
      - xpack.security.enabled=false
@@ -312,7 +310,7 @@ services:
      - "9004:8084"
     environment:
      - SPRING_PROFILES_ACTIVE=docker
-     - SPRING_CONFIG_LOCATION=/config/yti-datamodel-api.yml
+     - SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-datamodel-api.yml
     volumes:
      - ./config:/config:Z
      - /data/logs/yti-datamodel-api:/data/logs/yti-datamodel-api:Z

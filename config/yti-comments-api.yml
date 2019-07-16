@@ -24,20 +24,20 @@ impersonate:
   allowed: true
 
 groupmanagement:
-  url: "https://rhp.dev.yticloud.vrk.fi"
-  publicUrl: "https://rhp.dev.yti.cloud.vrk.fi"
-
-codelist:
-  url: "https//koodistot.dev.yticloud.vrk.fi"
-  publicUrl: "https://koodistot.dev.yticloud.vrk.fi"
+  url: ${environment.groupmanagement.url}
+  publicUrl: ${environment.groupmanagement.public-url}
 
 terminology:
-  url: "https://sanastot.dev.yticloud.vrk.fi"
-  publicUrl: "https://sanastot.dev.yticloud.vrk.fi"
+  url: ${environment.terminology.url}
+  publicUrl: ${environment.terminology.public-url}
 
 datamodel:
-  url: "https://tietomallit.dev.yticloud.vrk.fi"
-  publicUrl: "https://tietomallit.dev.yticloud.vrk.fi"
+  url: ${environment.datamodel.url}
+  publicUrl: ${environment.datamodel.public-url}
+
+codelist:
+  url: ${environment.codelist.api-url}
+  publicUrl: ${environment.codelist.public-url}
 
 application:
   scheme: http
@@ -87,20 +87,20 @@ impersonate:
   allowed: true
 
 groupmanagement:
-  url: "http://yti-groupmanagement:8002"
-  publicUrl: "http://localhost:9302"
-
-codelist:
-  url: "http://yti-codelist-public-api-service:9601"
-  publicUrl: "http://localhost:9601"
+  url: ${environment.groupmanagement.url}
+  publicUrl: ${environment.groupmanagement.public-url}
 
 terminology:
-  url: "http://yti-terminology-api:9103"
-  publicUrl: "http://localhost:9100"
+  url: ${environment.terminology.url}
+  publicUrl: ${environment.terminology.public-url}
 
 datamodel:
-  url: "http://yti-datamodel-api:8009"
-  publicUrl: "http://localhost:9001"
+  url: ${environment.datamodel.url}
+  publicUrl: ${environment.datamodel.public-url}
+
+codelist:
+  url: ${environment.codelist.api-url}
+  publicUrl: ${environment.codelist.public-url}
 
 application:
   scheme: http
