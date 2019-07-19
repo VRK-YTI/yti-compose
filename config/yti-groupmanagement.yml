@@ -27,7 +27,7 @@ logging:
     fi.vm.yti: DEBUG
 
 registration:
-  url: https://registration.eduuni.fi
+  url: https://id.eduuni.fi/signup?returnUrl=https://yhteentoimiva.suomi.fi
 
 groupmanagement:
   url: ${environment.groupmanagement.url}
@@ -85,7 +85,7 @@ logging:
     fi.vm.yti: DEBUG
 
 registration:
-  url: https://registration.eduuni.fi
+  url: https://id.eduuni.fi/signup?returnUrl=https://yhteentoimiva.suomi.fi
 
 groupmanagement:
   url: ${environment.groupmanagement.url}
