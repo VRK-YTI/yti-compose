@@ -8,6 +8,10 @@ spring:
     properties:
       hibernate:
         ddl-auto: none
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
 
 management:
   # Set management port to 10000 + server.port (i.e. e.g. if server.port = 9601, management port = 19601).
@@ -36,24 +40,27 @@ environment:
     host: 127.0.0.1
     port: 3030
   termed-api:
-    host: yti-terminology-termed-api
+    host: 127.0.0.1
     port: 9102
-    ajp: 9103
   postgres:
     host: 127.0.0.1
     port: 5432
   codelist:
     public-host: koodistot.dev.yti.cloud.vrk.fi
     public-url: https://${environment.codelist.public-host}
-    api-url: http://yti-codelist-public-api-service:9601
+    #api-url: http://localhost:9601
+    api-url: ${environment.codelist.public-url}
   terminology:
     public-url: https://sanastot.dev.yti.cloud.vrk.fi
-    url: http://yti-terminology-api:9103
+    #url: http://localhost:9103
+    url: ${environment.terminology.public-url}
   datamodel:
     public-url: https://tietomallit.dev.yti.cloud.vrk.fi
-    url: http://yti-datamodel-api:9004
+    #url: http://localhost:9004
+    url: ${environment.datamodel.public-url}
   groupmanagement:
     public-url: https://rhp.dev.yti.cloud.vrk.fi
+    #url: https://localhost:9302
     url: https://rhp.dev.yti.cloud.vrk.fi
   comments:
     public-host: kommentit.dev.yti.cloud.vrk.fi
