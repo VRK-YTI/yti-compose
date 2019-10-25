@@ -373,7 +373,28 @@ services:
      - yti-comments-api
     networks:
      - yti-network
- 
+
+  # COMMENTS
+
+  yti-comments-api:
+    image: "yti-messaging-api:latest"
+    container_name: "yti-messaging-api"
+    restart: always
+    ports:
+     - "9801:9801"
+    volumes:
+     - ./config:/config
+     - /data/logs/yti-messaging-api:/data/logs/yti-messaging-api:Z
+    command: -j -Xmx2048M -a --spring.profiles.active=default,docker --spring.config.location=/config/application.yml,/config/yti-messaging-api.yml
+    depends_on:
+     - yti-postgres
+     - yti-groupmanagement
+    links:
+     - yti-postgres
+     - yti-groupmanagement
+    networks:
+     - yti-network
+
 networks:
   yti-network:
     driver: bridge

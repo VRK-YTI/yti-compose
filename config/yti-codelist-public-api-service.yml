@@ -1,9 +1,8 @@
 ---
 spring:
   profiles: local
-
-service:
-  name: yti-codelist-public-api-service
+  application:
+    name: yti-codelist-public-api-service
 
 server:
   port: 9601
@@ -30,9 +29,8 @@ yti_codelist_public_api_service_elastic_cluster: ${environment.codelist-elastic.
 ---
 spring:
   profiles: docker
-
-service:
-  name: yti-codelist-public-api-service
+  application:
+    name: yti-codelist-public-api-service
 
 server:
   port: 9601

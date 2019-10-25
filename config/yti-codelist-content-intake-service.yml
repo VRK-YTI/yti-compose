@@ -1,9 +1,21 @@
 ---
 spring:
   profiles: local
+  application:
+    name: yti-codelist-content-intake-service
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    database-platform: "org.hibernate.dialect.PostgreSQL9Dialect"
+    properties:
+      hibernate:
+        ddl-auto: none
+        dialect: "org.hibernate.dialect.PostgreSQL9Dialect"
+        jdbc:
+          lob:
+            non_contextual_creation: true
 
 service:
-  name: yti-codelist-content-intake-service
   database-name: yti_codelist
 
 server:
@@ -27,6 +39,9 @@ datamodel:
 comments:
   publicUrl: ${environment.comments.public-url}
 
+messaging:
+  url: ${environment.messaging.url}
+
 application:
   scheme: http
   host: localhost
@@ -40,13 +55,13 @@ frontend:
   defaultStatus: null
   codeSchemeSortMode: "boostStatus"
 
-public_api:
+publicapi:
   scheme: http
   host: localhost
   port: 9601
   contextPath: "/codelist-api"
 
-uri_suomi:
+urisuomi:
   scheme: http
   host: uri.suomi.fi
   contextPath: "/codelist"
@@ -71,16 +86,17 @@ impersonate:
 fake:
   login:
     allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
+#    mail: "john.doe@example.com"
+#    firstName: "John"
+#    lastName: "Doe"
 
 ---
 spring:
   profiles: docker
+  application:
+    name: yti-codelist-content-intake-service
 
 service:
-  name: yti-codelist-content-intake-service
   database-name: yti_codelist
 
 server:
@@ -104,6 +120,9 @@ datamodel:
 comments:
   publicUrl: ${environment.comments.public-url}
 
+messaging:
+  url: ${environment.messaging.url}
+
 application:
   scheme: http
   host: localhost
@@ -117,13 +136,13 @@ frontend:
   defaultStatus: null
   codeSchemeSortMode: "boostStatus"
 
-public_api:
+publicapi:
   scheme: http
   host: localhost
   port: 9601
   contextPath: "/codelist-api"
 
-uri_suomi:
+urisuomi:
   scheme: http
   host: uri.suomi.fi
   contextPath: "/codelist"
@@ -148,7 +167,7 @@ impersonate:
 fake:
   login:
     allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
+#    mail: "john.doe@example.com"
+#    firstName: "John"
+#    lastName: "Doe"
 

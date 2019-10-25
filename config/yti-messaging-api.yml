@@ -2,7 +2,16 @@
 spring:
   profiles: local
   application:
-    name: yti-comments-api
+    name: yti-messaging-api
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   jpa:
     show-sql: false
     generate-ddl: false
@@ -16,58 +25,40 @@ spring:
             non_contextual_creation: true
 
 service:
-  name: yti-comments-api
-  database-name: yti_comments
+  database-name: yti_messaging
 
 server:
-  port: 9701
+  port: 9801
 
 tomcat:
   ajp:
-    port: 9702
-
-#debug: true
-
-fake:
-  login:
-    allowed: true
-#    mail: "john.doe@example.com"
-#    firstName: "John"
-#    lastName: "Doe"
-
-impersonate:
-  allowed: true
+    port: 9802
 
 groupmanagement:
   url: ${environment.groupmanagement.url}
   publicUrl: ${environment.groupmanagement.public-url}
+
+codelist:
+  url: ${environment.codelist.url}
+  publicUrl: ${environment.codelist.public-url}
 
 terminology:
   url: ${environment.terminology.url}
   publicUrl: ${environment.terminology.public-url}
 
 datamodel:
-  url: ${environment.datamodel.url}
   publicUrl: ${environment.datamodel.public-url}
 
-codelist:
-  url: ${environment.codelist.api-url}
-  publicUrl: ${environment.codelist.public-url}
-
-messaging:
-  url: ${environment.messaging.url}
+comments:
+  publicUrl: ${environment.comments.public-url}
 
 application:
   scheme: http
   host: localhost
   port: ${server.port}
-  contextPath: "/comments-api"
+  contextPath: "/messaging-api"
   access-log: true
   env: local
-
-uri_suomi:
-  scheme: http
-  host: uri.suomi.fi
 
 session:
   timeout-mins: 10
@@ -78,59 +69,75 @@ hikari:
   password:
   minimumIdle: 10
   maximumPoolSize: 10
+
+impersonate:
+  allowed: true
+
+fake:
+  login:
+    allowed: true
 
 ---
 spring:
   profiles: docker
+  application:
+    name: yti-messaging-api
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    database-platform: "org.hibernate.dialect.PostgreSQL9Dialect"
+    properties:
+      hibernate:
+        ddl-auto: none
+        dialect: "org.hibernate.dialect.PostgreSQL9Dialect"
+        jdbc:
+          lob:
+            non_contextual_creation: true
 
 service:
-  name: yti-comments-api
-  database-name: yti_comments
+  database-name: yti_messaging
 
 server:
-  port: 9701
+  port: 9801
 
 tomcat:
   ajp:
-    port: 9702
-
-fake:
-  login:
-    allowed: true
-#    mail: "john.doe@example.com"
-#    firstName: "John"
-#    lastName: "Doe"
-
-impersonate:
-  allowed: true
+    port: 9802
 
 groupmanagement:
   url: ${environment.groupmanagement.url}
   publicUrl: ${environment.groupmanagement.public-url}
+
+codelist:
+  url: ${environment.codelist.url}
+  publicUrl: ${environment.codelist.public-url}
 
 terminology:
   url: ${environment.terminology.url}
   publicUrl: ${environment.terminology.public-url}
 
 datamodel:
-  url: ${environment.datamodel.url}
   publicUrl: ${environment.datamodel.public-url}
 
-codelist:
-  url: ${environment.codelist.api-url}
-  publicUrl: ${environment.codelist.public-url}
+comments:
+  publicUrl: ${environment.comments.public-url}
 
 application:
   scheme: http
   host: localhost
   port: ${server.port}
-  contextPath: "/comments-api"
+  contextPath: "/messaging-api"
   access-log: true
   env: local
-
-uri_suomi:
-  scheme: http
-  host: uri.suomi.fi
 
 session:
   timeout-mins: 10
@@ -141,3 +148,12 @@ hikari:
   password:
   minimumIdle: 10
   maximumPoolSize: 10
+
+impersonate:
+  allowed: true
+
+fake:
+  login:
+    allowed: true
+
+

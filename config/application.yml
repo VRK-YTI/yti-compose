@@ -1,17 +1,6 @@
 ---
 spring:
   profiles: local
-  jpa:
-    #show-sql: true
-    generate-ddl: false
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
-    properties:
-      hibernate:
-        ddl-auto: none
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
-        jdbc:
-          lob:
-            non_contextual_creation: true
 
 management:
   # Set management port to 10000 + server.port (i.e. e.g. if server.port = 9601, management port = 19601).
@@ -46,8 +35,9 @@ environment:
     host: 127.0.0.1
     port: 5432
   codelist:
+    #public-host: localhost:9600
     public-host: koodistot.dev.yti.cloud.vrk.fi
-    public-url: https://${environment.codelist.public-host}
+    public-url: http://${environment.codelist.public-host}
     #api-url: http://localhost:9601
     api-url: ${environment.codelist.public-url}
   terminology:
@@ -64,7 +54,10 @@ environment:
     url: https://rhp.dev.yti.cloud.vrk.fi
   comments:
     public-host: kommentit.dev.yti.cloud.vrk.fi
-    public-url: https://${environment.comments.public-host}
+    #public-host: localhost:9700
+    public-url: http://${environment.comments.public-host}
+  messaging:
+    url: http://localhost:9801
 
 ---
 spring:
@@ -126,3 +119,5 @@ environment:
   comments:
     public-host: kommentit.dev.yti.cloud.vrk.fi
     public-url: https://${environment.comments.public-host}
+  messaging:
+    url: http://yti-messaging-api:9801
