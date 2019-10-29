@@ -43,6 +43,7 @@ services:
   dataModelUrl: ${environment.datamodel.public-url}
   groupManagementUrl: ${environment.groupmanagement.public-url}
   commentsUrl: ${environment.comments.public-url}
+  messagingEnabled: ${environment.messaging.enabled}
   env: local
 
 impersonate:
@@ -107,6 +108,7 @@ services:
   dataModelUrl: ${environment.datamodel.public-url}
   groupManagementUrl: ${environment.groupmanagement.public-url}
   commentsUrl: ${environment.comments.public-url}
+  messagingEnabled: ${environment.messaging.enabled}
   env: docker
 
 impersonate:

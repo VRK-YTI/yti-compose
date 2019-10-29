@@ -41,6 +41,7 @@ comments:
 
 messaging:
   url: ${environment.messaging.url}
+  enabled: ${environment.messaging.enabled}
 
 application:
   scheme: http
@@ -122,6 +123,7 @@ comments:
 
 messaging:
   url: ${environment.messaging.url}
+  enabled: ${environment.messaging.enabled}
 
 application:
   scheme: http

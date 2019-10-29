@@ -26,6 +26,7 @@ defaultTerminologyAPI: ${environment.terminology.url}/
 publicTerminologyFrontend: ${environment.terminology.public-url}
 publicCommentsFrontend: ${environment.comments.public-url}
 publicTermedAPI: ${environment.terminology.public-url}/termed-api/
+messagingEnabled: ${environment.messaging.enabled}
 
 groupmanagement:
   url: ${environment.groupmanagement.url}
@@ -71,6 +72,7 @@ defaultTerminologyAPI: ${environment.terminology.url}/
 publicTerminologyFrontend: ${environment.terminology.public-url}
 publicCommentsFrontend: ${environment.comments.public-url}
 publicTermedAPI: ${environment.terminology.public-url}/termed-api/
+messagingEnabled: ${environment.messaging.enabled}
 
 groupmanagement:
   url: ${environment.groupmanagement.url}
