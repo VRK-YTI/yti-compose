@@ -7,7 +7,7 @@ tomcat:
     port: 8009
 
 elasticHost: ${environment.datamodel-elastic.host}
-elasticPort: ${environment.datamodel-elastic.port}
+elasticHttpPort: ${environment.datamodel-elastic.port}
 elasticHttpScheme: http
 
 endpoint: http://localhost:3030
@@ -27,6 +27,10 @@ publicTerminologyFrontend: ${environment.terminology.public-url}
 publicCommentsFrontend: ${environment.comments.public-url}
 publicTermedAPI: ${environment.terminology.public-url}/termed-api/
 messagingEnabled: ${environment.messaging.enabled}
+
+migration:
+  enabled: true
+  packageLocation: fi.vm.yti.datamodel.api.migration.task
 
 groupmanagement:
   url: ${environment.groupmanagement.url}
@@ -73,6 +77,10 @@ publicTerminologyFrontend: ${environment.terminology.public-url}
 publicCommentsFrontend: ${environment.comments.public-url}
 publicTermedAPI: ${environment.terminology.public-url}/termed-api/
 messagingEnabled: ${environment.messaging.enabled}
+
+migration:
+  enabled: true
+  packageLocation: fi.vm.yti.datamodel.api.migration.task
 
 groupmanagement:
   url: ${environment.groupmanagement.url}
