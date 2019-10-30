@@ -35,11 +35,11 @@ environment:
     host: 127.0.0.1
     port: 5432
   codelist:
-    #public-host: localhost:9600
-    public-host: koodistot.dev.yti.cloud.vrk.fi
+    public-host: localhost:9600
+    #public-host: koodistot.dev.yti.cloud.vrk.fi
     public-url: http://${environment.codelist.public-host}
-    #api-url: http://localhost:9601
-    api-url: ${environment.codelist.public-url}
+    api-url: http://localhost:9601
+    #api-url: ${environment.codelist.public-url}
   terminology:
     public-url: https://sanastot.dev.yti.cloud.vrk.fi
     #url: http://localhost:9103

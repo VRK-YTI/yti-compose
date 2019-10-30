@@ -55,7 +55,6 @@ codelist:
   publicUrl: ${environment.codelist.public-url}
 
 messaging:
-  url: ${environment.messaging.url}
   enabled: ${environment.messaging.enabled}
 
 application:
@@ -120,6 +119,9 @@ datamodel:
 codelist:
   url: ${environment.codelist.api-url}
   publicUrl: ${environment.codelist.public-url}
+
+messaging:
+  enabled: ${environment.messaging.enabled}
 
 application:
   scheme: http
