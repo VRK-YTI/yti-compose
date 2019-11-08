@@ -7,6 +7,10 @@ spring:
 server:
   port: 9601
 
+tomcat:
+  ajp:
+    port: 9604
+
 frontend:
   scheme: http
   host: localhost
@@ -19,8 +23,19 @@ application:
   contextPath: "/codelist-api"
   access-log: true
 
+groupmanagement:
+  url: ${environment.groupmanagement.url}
+  publicUrl: ${environment.groupmanagement.public-url}
+
 session:
   timeout-mins: 10
+
+impersonate:
+  allowed: true
+
+fake:
+  login:
+    allowed: true
 
 yti_codelist_public_api_service_elastic_host: ${environment.codelist-elastic.host}
 yti_codelist_public_api_service_elastic_port: ${environment.codelist-elastic.port}
@@ -47,8 +62,19 @@ application:
   contextPath: "/codelist-api"
   access-log: true
 
+groupmanagement:
+  url: ${environment.groupmanagement.url}
+  publicUrl: ${environment.groupmanagement.public-url}
+
 session:
   timeout-mins: 10
+
+impersonate:
+  allowed: true
+
+fake:
+  login:
+    allowed: true
 
 yti_codelist_public_api_service_elastic_host: ${environment.codelist-elastic.host}
 yti_codelist_public_api_service_elastic_port: ${environment.codelist-elastic.port}

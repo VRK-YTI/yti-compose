@@ -46,6 +46,9 @@ application:
   commentsUrl: ${environment.comments.public-url}
   env: local
 
+jwt:
+  secret: TESTSECRET
+
 fake:
   login:
     allowed: true
