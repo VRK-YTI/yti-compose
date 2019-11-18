@@ -17,12 +17,12 @@ defaultTermedAPI: http://${environment.termed-api.host}:${environment.termed-api
 
 defaultGroupManagementAPI: ${environment.groupmanagement.url}/public-api/
 publicGroupManagementAPI: ${environment.groupmanagement.public-url}
-defaultSuomiCodeServerAPI: ${environment.codelist.public-url}/codelist-api/api/v1/
+defaultSuomiCodeServerAPI: ${environment.codelist.public-url}/codelist-api/api/
 defaultTermedAPIUser: admin
 defaultTermedAPIUserSecret: admin
 publicGroupManagementFrontend: ${environment.groupmanagement.public-url}
 publicSuomiCodeServerFrontend: ${environment.codelist.public-url}
-defaultTerminologyAPI: ${environment.terminology.url}/
+defaultTerminologyAPI: ${environment.terminology.url}/terminology/api/
 publicTerminologyFrontend: ${environment.terminology.public-url}
 publicCommentsFrontend: ${environment.comments.public-url}
 publicTermedAPI: ${environment.terminology.public-url}/termed-api/
