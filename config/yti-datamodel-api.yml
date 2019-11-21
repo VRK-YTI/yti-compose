@@ -22,7 +22,8 @@ defaultTermedAPIUser: admin
 defaultTermedAPIUserSecret: admin
 publicGroupManagementFrontend: ${environment.groupmanagement.public-url}
 publicSuomiCodeServerFrontend: ${environment.codelist.public-url}
-defaultTerminologyAPI: ${environment.terminology.url}/terminology/api/
+defaultTerminologyAPI: ${environment.terminology.url}/terminology-api/api/
+privateTerminologyAPI: ${environment.terminology.url}/terminology-api/private/
 publicTerminologyFrontend: ${environment.terminology.public-url}
 publicCommentsFrontend: ${environment.comments.public-url}
 publicTermedAPI: ${environment.terminology.public-url}/termed-api/

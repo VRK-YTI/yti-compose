@@ -17,7 +17,7 @@ tomcat:
 
 server:
   port: 8001
-  context-path: /terminology
+  context-path: /terminology-api
 
 search:
   host:
@@ -37,7 +37,7 @@ groupmanagement:
 
 notify:
   hook:
-    url: ${environment.terminology.url}/terminology/api/v1/notify
+    url: ${environment.terminology.url}/terminology-api/private/v1/notify
 
 services:
   codeListUrl: ${environment.codelist.public-url}
@@ -83,6 +83,7 @@ tomcat:
 
 server:
   port: 8001
+  context-path: /terminology-api
 
 search:
   host:
@@ -102,7 +103,7 @@ groupmanagement:
 
 notify:
   hook:
-    url: ${environment.terminology.url}/notify
+    url: ${environment.terminology.url}/terminology-api/private/v1/notify
 
 services:
   codeListUrl: ${environment.codelist.public-url}
