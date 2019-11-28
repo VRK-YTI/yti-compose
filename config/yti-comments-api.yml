@@ -65,6 +65,11 @@ application:
   access-log: true
   env: local
 
+frontend:
+  scheme: http
+  host: localhost
+  port: 9700
+
 uri_suomi:
   scheme: http
   host: uri.suomi.fi
