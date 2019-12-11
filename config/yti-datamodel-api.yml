@@ -19,6 +19,7 @@ devMode: true
 defaultTermedAPI: http://${environment.termed-api.host}:${environment.termed-api.port}/api/
 
 defaultGroupManagementAPI: ${environment.groupmanagement.url}/public-api/
+privateGroupManagementAPI: ${environment.groupmanagement.url}/private-api/
 publicGroupManagementAPI: ${environment.groupmanagement.public-url}
 defaultSuomiCodeServerAPI: ${environment.codelist.public-url}/codelist-api/api/
 defaultTermedAPIUser: admin
