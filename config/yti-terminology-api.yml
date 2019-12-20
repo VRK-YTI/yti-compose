@@ -18,6 +18,9 @@ tomcat:
 server:
   port: 8001
   context-path: /terminology-api
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,application/javascript,application/json
 
 search:
   host:
