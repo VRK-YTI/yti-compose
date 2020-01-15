@@ -72,10 +72,13 @@ Script runs all individual build.sh scripts and publishes local dependecies. Alt
 
 ### Setting up the database for development and testing
 
+Run in yti-compose directory:
+
 ```
 sudo chmod -R 777 /data/logs/yti-postgres
 sudo docker-compose up -d yti-postgres
-sudo yti-compose/src/script/init-admin.db
+sudo docker-compose up -d yti-groupmanagement
+sudo src/script/init-admin.db
 ```
 
 ### Running whole service via docker-compose, logging goes to system out
