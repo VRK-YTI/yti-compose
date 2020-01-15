@@ -55,14 +55,14 @@ export SPRING_PROFILES_ACTIVE=local
 Clone required repos manually or using [bootstrap script](https://github.com/VRK-YTI/yti-compose/blob/master/src/script/bootstrap.sh):
 
 ```
-sudo yti-compose/src/script/bootstrap.sh
+sudo yti-compose/src/script/bootstrap.sh master
 ```
  
-Script clones all of the required repos to the current directory.
+Script clones all of the required repos to the current directory under build.master folder
 
 ### Building components using command line
 
-Each component includes build.sh script which builds the component. Run builds by [setup script](https://github.com/VRK-YTI/yti-compose/blob/master/src/script/bootstrap.sh):
+Each component includes build.sh script which builds the component. Run builds by [setup script](https://github.com/VRK-YTI/yti-compose/blob/master/src/script/setup.sh):
 
 ```
 sudo yti-compose/src/script/setup.sh
