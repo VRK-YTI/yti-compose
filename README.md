@@ -62,15 +62,52 @@ Script clones all of the required repos to the current directory.
 
 ### Building components using command line
 
-Each component includes build.sh script which builds the component. Run all build manually or by [setup script](https://github.com/VRK-YTI/yti-compose/blob/master/src/script/bootstrap.sh):
+Each component includes build.sh script which builds the component. Run builds by [setup script](https://github.com/VRK-YTI/yti-compose/blob/master/src/script/bootstrap.sh):
 
 ```
 sudo yti-compose/src/script/setup.sh
 ```
 
-Script runs all individual build.sh scripts and publishes local dependecies.
+Script runs all individual build.sh scripts and publishes local dependecies. Alternatively see **Manual building**.
 
-#### Manual building
+### Setting up the database for development and testing
+
+```
+sudo chmod -R 777 /data/logs/yti-postgres
+sudo docker-compose up -d yti-postgres
+sudo yti-compose/src/script/init-admin.db
+```
+
+### Running whole service via docker-compose, logging goes to system out
+```
+docker-compose up
+```
+
+#### Running individual services in backround
+```
+docker-compose up -d <service_name>
+```
+
+#### Looking at service logs for a specific service
+```
+docker logs --tail=200 -f "container_name_or_id"
+```
+
+#### Docker process listing
+
+Active processes
+```
+docker ps
+```
+
+All processes
+```
+docker ps -a
+```
+
+### Manual building
+
+Components can (and sometimes should) be built and published manually. Each component has build.sh script that builds the component. Here are some examples how to build components manually: 
 
 #### YTI ActiveMQ
 
@@ -212,31 +249,4 @@ cd yti-postgres
 cd ..
 cd yti-compose
 docker-compose up -d yti-postgres
-```
-
-### Running whole service via docker-compose, logging goes to system out
-```
-docker-compose up
-```
-
-#### Running individual services in backround
-```
-docker-compose up -d <service_name>
-```
-
-#### Looking at service logs for a specific service
-```
-docker logs --tail=200 -f "container_name_or_id"
-```
-
-#### Docker process listing
-
-Active processes
-```
-docker ps
-```
-
-All processes
-```
-docker ps -a
 ```
