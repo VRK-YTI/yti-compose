@@ -23,6 +23,10 @@ to your ~/.bashrc or ~/.bash_profile.
 
 ## Prerequisities
 
+### Java 1.8
+
+Install Java JDK 8 (OpenJdk or Oracle)
+
 ### Gradle
 
 Install gradle (Tested with 4.2)
@@ -46,13 +50,67 @@ Docker defaults to 2 GB memory, this needs to be changed to a minumum of 4++ GB 
 export SPRING_PROFILES_ACTIVE=local
 ```
 
-### Cloning required repos
+### Cloning required repositories
 
-Clone required repos manually or using [script](https://github.com/VRK-YTI/yti-compose/blob/master/src/script/bootstrap.sh). Script clones all of the required repos to the current directory.
+Clone required repos manually or using [bootstrap script](https://github.com/VRK-YTI/yti-compose/blob/master/src/script/bootstrap.sh):
+
+```
+sudo yti-compose/src/script/bootstrap.sh
+```
+ 
+Script clones all of the required repos to the current directory.
 
 ### Building components using command line
 
-#### Generic artifacts
+Each component includes build.sh script which builds the component. Run builds by [setup script](https://github.com/VRK-YTI/yti-compose/blob/master/src/script/bootstrap.sh):
+
+```
+sudo yti-compose/src/script/setup.sh
+```
+
+Script runs all individual build.sh scripts and publishes local dependecies. Alternatively see **Manual building**.
+
+### Setting up the database for development and testing
+
+Run in yti-compose directory:
+
+```
+sudo chmod -R 777 /data/logs/yti-postgres
+sudo docker-compose up -d yti-postgres
+sudo docker-compose up -d yti-groupmanagement
+sudo src/script/init-admin.db
+```
+
+### Running whole service via docker-compose, logging goes to system out
+```
+docker-compose up
+```
+
+#### Running individual services in backround
+```
+docker-compose up -d <service_name>
+```
+
+#### Looking at service logs for a specific service
+```
+docker logs --tail=200 -f "container_name_or_id"
+```
+
+#### Docker process listing
+
+Active processes
+```
+docker ps
+```
+
+All processes
+```
+docker ps -a
+```
+
+### Manual building
+
+Components can (and sometimes should) be built and published manually. Each component has build.sh script that builds the component. Here are some examples how to build components manually: 
 
 #### YTI ActiveMQ
 
@@ -66,7 +124,7 @@ cd ..
 
 ```
 cd yti-spring-security
-git checkout tags/v.0.1.2
+git checkout tags/{{latest tag}}
 ./gradlew publishToMavenLocal
 cd ..
 ```
@@ -74,7 +132,7 @@ cd ..
 #### YTI Spring Migration
 ```
 cd yti-spring-migration
-git checkout tags/v0.1.3
+git checkout tags/{{latest tag}}
 ./gradlew publishToMavenLocal
 cd ..
 ```
@@ -194,31 +252,4 @@ cd yti-postgres
 cd ..
 cd yti-compose
 docker-compose up -d yti-postgres
-```
-
-#### Running whole service via docker-compose, logging goes to system out
-```
-docker-compose up
-```
-
-#### Running individual services in backround
-```
-docker-compose up -d <service_name>
-```
-
-#### Looking at service logs for a specific service
-```
-docker logs --tail=200 -f "container_name_or_id"
-```
-
-#### Docker process listing
-
-Active processes
-```
-docker ps
-```
-
-All processes
-```
-docker ps -a
 ```
