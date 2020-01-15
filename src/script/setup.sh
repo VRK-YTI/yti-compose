@@ -6,6 +6,7 @@ GENERIC_COMPONENTS="yti-spring-security
 		    yti-spring-migration"
 #YTI service components
 COMPONENTS="yti-docker-java-base
+            yti-postgres
             yti-groupmanagement
             yti-codelist-common-model
 	    yti-codelist-public-api-service
