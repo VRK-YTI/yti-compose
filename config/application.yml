@@ -86,7 +86,7 @@ environment:
     port: 9200
     cluster: yti-codelist-elasticsearch
   datamodel-elastic:
-    host: yti-datamodel-elastic
+    host: yti-datamodel-elasticsearch
     port: 9200
   terminology-elastic:
     host: yti-terminology-elasticsearch
