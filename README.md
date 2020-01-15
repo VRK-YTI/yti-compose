@@ -75,13 +75,13 @@ Script runs all individual build.sh scripts and publishes local dependecies. Alt
 Run in yti-compose directory:
 
 ```
-sudo chmod -R 777 /data/logs/yti-postgres
+sudo chmod -R 777 /data/logs
 sudo docker-compose up -d yti-postgres
 sudo docker-compose up -d yti-groupmanagement
 sudo src/script/init-admin.db
 ```
 
-Running init-admin.sh will add one dummy admin user and organization to the database. 
+Sets permissions for postgres and elasticsearch to write logs in /data/lods. Lastly running init-admin.sh will add one dummy admin user and organization to the database. 
 
 ### Running whole service via docker-compose, logging goes to system out
 ```
