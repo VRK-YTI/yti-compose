@@ -1,5 +1,5 @@
 #!/bin/bash
-BUILD_BASE=$PWD/build
+BRANCH=master
 
 #YTI common libraries
 GENERIC_COMPONENTS="yti-spring-security
@@ -43,6 +43,12 @@ build_component () {
 }
 
 echo "Starting development environment Setup" 
+if [ $# -eq 1 ]
+  then
+      echo "Active branch $1"
+      BRANCH=$1
+fi
+BUILD_BASE=$PWD/build.$BRANCH
 #build generic artifacts
 for component in $GENERIC_COMPONENTS
 do
