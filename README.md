@@ -70,7 +70,7 @@ sudo yti-compose/src/script/setup.sh
 
 Script runs all individual build.sh scripts and publishes local dependecies. Alternatively see **Manual building**.
 
-### Setting up the database for development and testing
+### Setting up the database for local development and testing
 
 Run in yti-compose directory:
 
@@ -80,6 +80,8 @@ sudo docker-compose up -d yti-postgres
 sudo docker-compose up -d yti-groupmanagement
 sudo src/script/init-admin.db
 ```
+
+Running init-admin.sh will add one dummy admin user and organization to the database. 
 
 ### Running whole service via docker-compose, logging goes to system out
 ```
