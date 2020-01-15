@@ -1,6 +1,5 @@
 #!/bin/bash
-#Where to fetch sources
-BUILD_BASE=$PWD/build
+
 #Component-list
 components="yti-spring-security
 yti-spring-migration
@@ -29,23 +28,32 @@ termedComponents="termed-api"
 YTI_REPO="https://github.com/VRK-YTI/"
 TERMED_REPO="https://github.com/THLfi/"
 
-#clone given repository from git
+#clone given repository from git with given branch or master
 clone_component_from_git () {
-    `git clone $1$2.git`
+        `git clone $1$2.git -b$3`
 }
 
 #Main
+#Where to fetch sources
+BRANCH=master
+if [ $# -eq 1 ]
+  then
+      echo "Active branch $1"
+      BRANCH=$1
+fi
+BUILD_BASE=$PWD/build.$BRANCH
+
 echo Clone repositories
 mkdir -p $BUILD_BASE
 cd $BUILD_BASE
-echo YTI
+echo "Fetching YTI into the $BUILD_BASE"
 for currentComponent in $components
 do
-    clone_component_from_git $YTI_REPO $currentComponent
+    clone_component_from_git $YTI_REPO $currentComponent $BRANCH
 done
 echo TERMED
 for currentComponent in $termedComponents
 do
-    clone_component_from_git $TERMED_REPO $currentComponent
+    clone_component_from_git $TERMED_REPO $currentComponent $BRANCH
 done
 cd ..
