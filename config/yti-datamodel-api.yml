@@ -65,7 +65,7 @@ tomcat:
     port: 8009
 
 elasticHost: ${environment.datamodel-elastic.host}
-elasticPort: ${environment.datamodel-elastic.port}
+elasticHttpPort: ${environment.datamodel-elastic.port}
 elasticHttpScheme: http
 
 endpoint: http://yti-fuseki:3030
