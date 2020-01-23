@@ -73,8 +73,8 @@ hikari:
   jdbcUrl: jdbc:postgresql://${environment.postgres.host}:${environment.postgres.port}/${service.database-name}
   username: postgres
   password:
-  minimumIdle: 10
-  maximumPoolSize: 10
+  minimumIdle: 20
+  maximumPoolSize: 100
 
 yti_codelist_content_intake_service_elastic_host: ${environment.codelist-elastic.host}
 yti_codelist_content_intake_service_elastic_port: ${environment.codelist-elastic.port}
@@ -86,9 +86,6 @@ impersonate:
 fake:
   login:
     allowed: true
-#    mail: "john.doe@example.com"
-#    firstName: "John"
-#    lastName: "Doe"
 
 ---
 spring:
@@ -167,7 +164,4 @@ impersonate:
 fake:
   login:
     allowed: true
-#    mail: "john.doe@example.com"
-#    firstName: "John"
-#    lastName: "Doe"
 

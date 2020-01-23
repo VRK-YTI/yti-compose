@@ -31,9 +31,6 @@ tomcat:
 fake:
   login:
     allowed: true
-#    mail: "john.doe@example.com"
-#    firstName: "John"
-#    lastName: "Doe"
 
 impersonate:
   allowed: true
@@ -102,9 +99,6 @@ tomcat:
 fake:
   login:
     allowed: true
-#    mail: "john.doe@example.com"
-#    firstName: "John"
-#    lastName: "Doe"
 
 impersonate:
   allowed: true

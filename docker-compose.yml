@@ -97,8 +97,8 @@ services:
     container_name: yti-groupmanagement
     restart: always
     ports:
-     - "9302:8002"
-     - "9300:9090"
+     - "9302:9302"
+     - "9300:9300"
     volumes:
      - ./config:/config
     environment:
@@ -231,8 +231,8 @@ services:
      - SPRING_PROFILES_ACTIVE=docker
      - SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-terminology-api.yml
     ports:
-     - "9101:9090"
-     - "9103:8001"
+     - "9101:9101"
+     - "9103:9103"
     volumes:
      - ./config:/config:Z
      - /data/logs/yti-terminology-api:/data/logs/yti-terminology-api:Z
@@ -302,12 +302,11 @@ services:
     image: "yti-datamodel-api:latest"
     container_name: "yti-datamodel-api"
     expose:
-     - "8080"
-     - "8084"
-     - "8009"
+     - "9001"
+     - "9004"
     ports:
-     - "9001:8009"
-     - "9004:8084"
+     - "9001:9001"
+     - "9004:9004"
     environment:
      - SPRING_PROFILES_ACTIVE=docker
      - SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-datamodel-api.yml
@@ -374,9 +373,9 @@ services:
     networks:
      - yti-network
 
-  # COMMENTS
+  # MESSAGING
 
-  yti-comments-api:
+  yti-messaging-api:
     image: "yti-messaging-api:latest"
     container_name: "yti-messaging-api"
     restart: always

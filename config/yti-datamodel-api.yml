@@ -3,11 +3,11 @@ spring:
   profiles: local
 
 server:
-  port: 8084
+  port: 9004
 
 tomcat:
   ajp:
-    port: 8009
+    port: 9001
 
 elasticHost: ${environment.datamodel-elastic.host}
 elasticHttpPort: ${environment.datamodel-elastic.port}
@@ -49,9 +49,6 @@ env: local
 fake:
   login:
     allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
 
 impersonate:
   allowed: true
@@ -60,9 +57,12 @@ impersonate:
 spring:
   profiles: docker
 
+server:
+  port: 9004
+
 tomcat:
   ajp:
-    port: 8009
+    port: 9001
 
 elasticHost: ${environment.datamodel-elastic.host}
 elasticHttpPort: ${environment.datamodel-elastic.port}
@@ -102,9 +102,6 @@ env: local
 fake:
   login:
     allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
 
 impersonate:
   allowed: true

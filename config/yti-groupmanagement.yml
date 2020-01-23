@@ -4,12 +4,14 @@ spring:
   application:
     name: yti-groupmanagement
   mail:
-    host: smtp.pouta.csc.fi
+    host: smtp.gmail.com
+    port: 587
     properties:
-      smtp:
-        connectiontimeout: 5000
-        timeout: 3000
-        writetimeout: 5000
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://${environment.postgres.host}:${environment.postgres.port}/${service.database-name}
@@ -20,7 +22,11 @@ service:
   database-name: groupmanagement
 
 server:
-  port: 8002
+  port: 9302
+
+tomcat:
+  ajp:
+    port: 9300
 
 logging:
   level:
@@ -53,9 +59,6 @@ jwt:
 fake:
   login:
     allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
 
 impersonate:
   allowed: true
@@ -66,12 +69,14 @@ spring:
   application:
     name: yti-groupmanagement
   mail:
-    host: smtp.pouta.csc.fi
+    host: smtp.gmail.com
+    port: 587
     properties:
-      smtp:
-        connectiontimeout: 5000
-        timeout: 3000
-        writetimeout: 5000
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://${environment.postgres.host}:${environment.postgres.port}/${service.database-name}
@@ -82,7 +87,11 @@ service:
   database-name: groupmanagement
 
 server:
-  port: 8002
+  port: 9302
+
+tomcat:
+  ajp:
+    port: 9300
 
 logging:
   level:
@@ -115,9 +124,6 @@ jwt:
 fake:
   login:
     allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
 
 impersonate:
   allowed: true

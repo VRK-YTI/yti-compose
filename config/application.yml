@@ -121,4 +121,4 @@ environment:
     public-host: kommentit.dev.yti.cloud.vrk.fi
     public-url: https://${environment.comments.public-host}
   messaging:
-    enabled: true
+    enabled: false

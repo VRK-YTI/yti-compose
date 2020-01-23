@@ -78,7 +78,7 @@ fake:
     allowed: true
 
 admin:
-  email: "y-alusta.tuotetiimi@vrk.fi"
+  email: "y-alusta.tuotetiimi@dvv.fi"
 
 ---
 spring:
@@ -160,5 +160,5 @@ fake:
     allowed: true
 
 admin:
-  email: "y-alusta.tuotetiimi@vrk.fi"
+  email: "y-alusta.tuotetiimi@dvv.fi"
 

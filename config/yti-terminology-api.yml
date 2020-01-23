@@ -13,10 +13,10 @@ spring:
 
 tomcat:
   ajp:
-    port: 9090
+    port: 9101
 
 server:
-  port: 8001
+  port: 9103
   context-path: /terminology-api
   compression:
     enabled: true
@@ -63,9 +63,6 @@ application:
 fake:
   login:
     allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
 
 ---
 spring:
@@ -129,7 +126,4 @@ application:
 fake:
   login:
     allowed: true
-    mail: "john.doe@example.com"
-    firstName: "John"
-    lastName: "Doe"
 
