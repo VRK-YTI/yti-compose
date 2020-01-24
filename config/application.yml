@@ -42,19 +42,19 @@ environment:
     #api-url: ${environment.codelist.public-url}
   terminology:
     public-url: https://sanastot.dev.yti.cloud.vrk.fi
-    #url: http://localhost:9103
-    url: ${environment.terminology.public-url}
+    url: http://localhost:9103
+    #url: ${environment.terminology.public-url}
   datamodel:
     public-url: https://tietomallit.dev.yti.cloud.vrk.fi
-    #url: http://localhost:9004
-    url: ${environment.datamodel.public-url}
+    url: http://localhost:9004
+    #url: ${environment.datamodel.public-url}
   groupmanagement:
     public-url: https://rhp.dev.yti.cloud.vrk.fi
-    #url: https://localhost:9302
-    url: https://rhp.dev.yti.cloud.vrk.fi
+    url: http://localhost:9302
+    #url: https://rhp.dev.yti.cloud.vrk.fi
   comments:
-    public-host: kommentit.dev.yti.cloud.vrk.fi
-    #public-host: localhost:9700
+    #public-host: kommentit.dev.yti.cloud.vrk.fi
+    public-host: localhost:9700
     public-url: http://${environment.comments.public-host}
   messaging:
     url: http://localhost:9801
@@ -116,7 +116,7 @@ environment:
     url: http://yti-datamodel-api:9004
   groupmanagement:
     public-url: https://rhp.dev.yti.cloud.vrk.fi
-    url: http://yti-groupmanagement:8002
+    url: http://yti-groupmanagement:9302
   comments:
     public-host: kommentit.dev.yti.cloud.vrk.fi
     public-url: https://${environment.comments.public-host}
