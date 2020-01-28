@@ -13,7 +13,7 @@ elasticHost: ${environment.datamodel-elastic.host}
 elasticHttpPort: ${environment.datamodel-elastic.port}
 elasticHttpScheme: http
 
-endpoint: http://localhost:3030
+endpoint: http://${environment.fuseki.host}:${environment.fuseki.port}
 
 devMode: true
 defaultTermedAPI: http://${environment.termed-api.host}:${environment.termed-api.port}/api/
@@ -68,7 +68,7 @@ elasticHost: ${environment.datamodel-elastic.host}
 elasticHttpPort: ${environment.datamodel-elastic.port}
 elasticHttpScheme: http
 
-endpoint: http://yti-fuseki:3030
+endpoint: http://${environment.fuseki.host}:${environment.fuseki.port}
 
 devMode: true
 defaultTermedAPI: http://${environment.termed-api.host}:${environment.termed-api.port}/api/
