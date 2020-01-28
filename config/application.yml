@@ -99,8 +99,7 @@ environment:
     port: 3030
   termed-api:
     host: yti-terminology-termed-api
-    port: 9102
-    ajp: 9103
+    port: 8080
   postgres:
     host: yti-postgres
     port: 5432

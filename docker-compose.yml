@@ -228,7 +228,7 @@ services:
     container_name: "yti-terminology-api"
     restart: always
     environment:
-     - SPRING_PROFILES_ACTIVE=docker
+     - SPRING_PROFILES_ACTIVE=default,docker
      - SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-terminology-api.yml
     ports:
      - "9101:9101"

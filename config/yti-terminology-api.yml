@@ -17,26 +17,47 @@ tomcat:
 
 server:
   port: 9103
-  context-path: /terminology-api
+  servlet:
+    context-path: /terminology-api
   compression:
     enabled: true
     mime-types: text/html,text/css,application/javascript,application/json
-
-search:
-  host:
-    url: ${environment.terminology-elastic.host}
-    port: ${environment.terminology-elastic.port}
-    scheme: http
 
 api:
   url: http://${environment.termed-api.host}:${environment.termed-api.port}/api
   user: admin
   pw: admin
 
+search:
+  host:
+    url: ${environment.terminology-elastic.host}
+    port: ${environment.terminology-elastic.port}
+    scheme: http
+  index:
+    name: concepts,vocabularies
+    file: create_index_default.json
+    mapping:
+      type: concept,vocabulary
+      file: create_concept_mappings.json,create_vocabulary_mappings.json
+    deleteIndexOnAppRestart: true
+
 groupmanagement:
   url: ${environment.groupmanagement.url}
   public:
     url: ${environment.groupmanagement.public-url}
+
+mq:
+  active:
+    subsystem: Vocabulary
+
+front:
+  restrictFilterOptions: true
+
+namespace:
+  root: http://uri.suomi.fi/terminology/
+
+organization:
+  graph: 228cce1e-8360-4039-a3f7-725df5643354
 
 notify:
   hook:
@@ -55,6 +76,7 @@ impersonate:
 
 migration:
   enabled: true
+  packageLocation: fi.vm.yti.terminology.api.migration.task
 
 application:
   public:
@@ -79,17 +101,28 @@ spring:
 
 tomcat:
   ajp:
-    port: 9090
+    port: 9101
 
 server:
-  port: 8001
-  context-path: /terminology-api
+  port: 9103
+  servlet:
+    context-path: /terminology-api
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,application/javascript,application/json
 
 search:
   host:
     url: ${environment.terminology-elastic.host}
     port: ${environment.terminology-elastic.port}
     scheme: http
+  index:
+    name: concepts,vocabularies
+    file: create_index_default.json
+    mapping:
+      type: concept,vocabulary
+      file: create_concept_mappings.json,create_vocabulary_mappings.json
+    deleteIndexOnAppRestart: true
 
 api:
   url: http://${environment.termed-api.host}:${environment.termed-api.port}/api
@@ -100,6 +133,19 @@ groupmanagement:
   url: ${environment.groupmanagement.url}
   public:
     url: ${environment.groupmanagement.public-url}
+
+mq:
+  active:
+    subsystem: Vocabulary
+
+front:
+  restrictFilterOptions: true
+
+namespace:
+  root: http://uri.suomi.fi/terminology/
+
+organization:
+  graph: 228cce1e-8360-4039-a3f7-725df5643354
 
 notify:
   hook:
@@ -118,6 +164,7 @@ impersonate:
 
 migration:
   enabled: true
+  packageLocation: fi.vm.yti.terminology.api.migration.task
 
 application:
   public:
