@@ -84,6 +84,19 @@ hikari:
 ---
 spring:
   profiles: docker
+  application:
+    name: yti-comments-api
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    database-platform: "org.hibernate.dialect.PostgreSQL9Dialect"
+    properties:
+      hibernate:
+        ddl-auto: none
+        dialect: "org.hibernate.dialect.PostgreSQL9Dialect"
+        jdbc:
+          lob:
+            non_contextual_creation: true
 
 service:
   name: yti-comments-api
@@ -129,6 +142,11 @@ application:
   contextPath: "/comments-api"
   access-log: true
   env: local
+
+frontend:
+  scheme: http
+  host: localhost
+  port: 9700
 
 uri_suomi:
   scheme: http
