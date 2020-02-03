@@ -5,7 +5,7 @@ BRANCH=master
 GENERIC_COMPONENTS="yti-spring-security
 		    yti-spring-migration"
 #YTI service components
-COMPONENTS="yti-docker-java-base
+COMPONENT_LIST="yti-docker-java-base
             yti-postgres
             yti-groupmanagement
             yti-codelist-common-model
@@ -48,6 +48,8 @@ if [ $# -eq 1 ]
   then
       echo "Active branch $1"
       BRANCH=$1
+  else
+    BRANCH=master
 fi
 BUILD_BASE=$PWD/build.$BRANCH
 #build generic artifacts
@@ -58,9 +60,9 @@ do
 done
 echo "Base libraries build"
 #Build release and YTI containers
-for component in $COMPONENTS
+for component in $COMPONENT_LIST
 do
     echo "Handling $component"
-    build_component  $component
+    build_component $component
 done
 echo "YTI build done" 
