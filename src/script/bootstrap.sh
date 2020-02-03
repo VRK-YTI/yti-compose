@@ -20,6 +20,7 @@ yti-datamodel-database
 yti-groupmanagement
 yti-comments-api
 yti-comments-ui
+yti-activemq
 yti-postgres
 "
 

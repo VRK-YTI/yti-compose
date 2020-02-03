@@ -12,6 +12,7 @@ COMPONENTS="yti-docker-java-base
 	    yti-codelist-public-api-service
 	    yti-codelist-content-intake-service
             yti-codelist-ui
+            yti-activemq
             yti-terminology-termed-docker
             yti-terminology-api
             yti-terminology-ui
