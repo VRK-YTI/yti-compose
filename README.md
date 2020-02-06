@@ -247,6 +247,13 @@ cd yti-comments-ui
 cd ..
 ```
 
+### Messaging API
+```
+cd yti-messaging-api
+./build.sh
+cd ..
+```
+
 #### Setting up the database for CLS applications
 ```
 cd yti-postgres
