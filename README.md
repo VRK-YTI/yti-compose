@@ -76,29 +76,35 @@ Run in yti-compose directory:
 
 ```
 sudo chmod -R 777 /data/logs
-sudo docker-compose up -d yti-postgres
 sudo docker-compose up -d yti-groupmanagement
 sudo src/script/init-admin.db
 ```
 
 Sets permissions for postgres and elasticsearch to write logs in /data/lods. Lastly running init-admin.sh will add one dummy admin user and organization to the database. 
 
-### Running whole service via docker-compose, logging goes to system out
-```
-docker-compose up
-```
+## Running services
 
-#### Running individual services in backround
+### Running individual services in backround
+
+Services should be started individually using: 
+
 ```
 docker-compose up -d <service_name>
+
+docker-compose up -d yti-datamodel-ui
+docker-compose up -d yti-terminology-ui
+docker-compose up -d yti-codelist-ui
+docker-compose up -d yti-comments-ui
 ```
 
-#### Looking at service logs for a specific service
+See service dependencies in docker-compose.yml 
+
+### Looking at service logs for a specific service
 ```
 docker logs --tail=200 -f "container_name_or_id"
 ```
 
-#### Docker process listing
+### Docker process listing
 
 Active processes
 ```
@@ -110,11 +116,11 @@ All processes
 docker ps -a
 ```
 
-### Manual building
+## Manual building
 
 Components can (and sometimes should) be built and published manually. Each component has build.sh script that builds the component. Here are some examples how to build components manually: 
 
-#### YTI ActiveMQ
+### YTI ActiveMQ
 
 ```
 cd yti-activemq
@@ -122,7 +128,7 @@ cd yti-activemq
 cd ..
 ```
 
-#### YTI Spring Security
+### YTI Spring Security
 
 ```
 cd yti-spring-security
@@ -131,7 +137,7 @@ git checkout tags/{{latest tag}}
 cd ..
 ```
 
-#### YTI Spring Migration
+### YTI Spring Migration
 ```
 cd yti-spring-migration
 git checkout tags/{{latest tag}}
@@ -139,21 +145,21 @@ git checkout tags/{{latest tag}}
 cd ..
 ```
 
-#### Codelist common model
+### Codelist common model
 ```
 cd yti-codelist-common-model
 ./build.sh
 cd ..
 ```
 
-#### Java docker base image
+### Java docker base image
 ```
 cd yti-docker-java-base
 ./build.sh alpine
 cd ..
 ```
 
-#### Codelist
+### Codelist
 
 #### Codelist Public API Service
 ```
@@ -176,7 +182,7 @@ cd yti-codelist-ui
 cd ..
 ```
 
-#### Terminology
+### Terminology
 
 #### Terminology Termed API
 ```
@@ -199,7 +205,7 @@ cd yti-terminology-ui
 cd ..
 ```
 
-#### Datamodel
+### Datamodel
 
 #### Datamodel API
 ```
@@ -222,7 +228,7 @@ cd yti-fuseki
 cd ..
 ```
 
-#### Groupmanagement
+### Groupmanagement
 
 #### Groupmanagement API + UI
 ```
@@ -231,7 +237,7 @@ cd yti-groupmanangement
 cd ..
 ```
 
-#### Comments
+### Comments
 
 #### Comments API
 ```
@@ -254,7 +260,7 @@ cd yti-messaging-api
 cd ..
 ```
 
-#### Setting up the database for CLS applications
+## Setting up the database for CLS applications
 ```
 cd yti-postgres
 ./build.sh
