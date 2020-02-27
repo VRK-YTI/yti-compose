@@ -3,24 +3,26 @@ BRANCH=master
 
 #YTI common libraries
 GENERIC_COMPONENTS="yti-spring-security
-		    yti-spring-migration"
+		    yti-spring-migration
+            yti-spring-mq"
 #YTI service components
 COMPONENT_LIST="yti-docker-java-base
             yti-postgres
             yti-groupmanagement
             yti-codelist-common-model
-	    yti-codelist-public-api-service
-	    yti-codelist-content-intake-service
+	        yti-codelist-public-api-service
+	        yti-codelist-content-intake-service
             yti-codelist-ui
             yti-activemq
             yti-terminology-termed-docker
             yti-terminology-api
             yti-terminology-ui
-	    yti-fuseki
-	    yti-datamodel-api
+    	    yti-fuseki
+	        yti-datamodel-api
             yti-datamodel-ui
             yti-comments-api
-            yti-comments-ui"
+            yti-comments-ui
+            yti-messaging-api"
 
 publish_component () {
     pushd . >/dev/null
