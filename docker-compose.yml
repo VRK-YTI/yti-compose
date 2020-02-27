@@ -106,6 +106,7 @@ services:
      - "SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-groupmanagement.yml"
     depends_on:
      - yti-postgres
+    command: ["./wait-for-it.sh", "localhost", "5432"]
     links:
      - yti-postgres
     networks:
@@ -397,4 +398,3 @@ services:
 networks:
   yti-network:
     driver: bridge
-
