@@ -68,6 +68,9 @@ services:
     volumes:
      - /data/logs/yti-postgres:/data/logs/yti-postgres:Z
     command: postgres -c logging_collector=on -c log_directory=/data/logs/yti-postgres
+    environment: 
+      # do not require password in local environment
+      POSTGRES_HOST_AUTH_METHOD: trust
     networks:
      - yti-network
 
