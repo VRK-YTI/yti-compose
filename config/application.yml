@@ -1,6 +1,9 @@
 ---
 spring:
   profiles: local
+  cloud:
+    config:
+      enabled: false
 
 management:
   # Set management port to 10000 + server.port (i.e. e.g. if server.port = 9601, management port = 19601).
@@ -63,6 +66,9 @@ environment:
 ---
 spring:
   profiles: docker
+  cloud:
+    config:
+      enabled: false
   jpa:
     #show-sql: true
     generate-ddl: false

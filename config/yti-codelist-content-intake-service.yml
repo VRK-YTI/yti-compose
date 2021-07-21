@@ -1,6 +1,8 @@
 ---
 spring:
-  profiles: local
+  config:
+    activate:
+      on-profile: local
   application:
     name: yti-codelist-content-intake-service
   jpa:
@@ -89,7 +91,9 @@ fake:
 
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   application:
     name: yti-codelist-content-intake-service
 

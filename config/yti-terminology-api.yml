@@ -1,6 +1,8 @@
 ---
 spring:
-  profiles: local
+  config:
+    activate:
+      on-profile: local
   http:
     multipart:
       enabled: true
@@ -88,7 +90,9 @@ fake:
 
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   http:
     multipart:
       enabled: true
