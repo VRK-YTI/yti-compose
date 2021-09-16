@@ -1,6 +1,8 @@
 ---
 spring:
-  profiles: local
+  config:
+    activate:
+      on-profile: local
 
 server:
   port: 9004
@@ -55,8 +57,10 @@ impersonate:
 
 ---
 spring:
-  profiles: docker
-
+  config:
+    activate:
+      on-profile: local
+      
 server:
   port: 9004
 

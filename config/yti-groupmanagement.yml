@@ -17,6 +17,8 @@ spring:
     url: jdbc:postgresql://${environment.postgres.host}:${environment.postgres.port}/${service.database-name}
     username: postgres
     password:
+  flyway:
+    table: schema_version
 
 service:
   database-name: groupmanagement
@@ -44,6 +46,9 @@ environment:
 send:
   admin:
     emails: false
+    
+admin:
+  email: "y-alusta.tuotetiimi@dvv.fi"
 
 application:
   codeListUrl: ${environment.codelist.public-url}
@@ -82,6 +87,8 @@ spring:
     url: jdbc:postgresql://${environment.postgres.host}:${environment.postgres.port}/${service.database-name}
     username: postgres
     password:
+  flyway:
+    table: schema_version
 
 service:
   database-name: groupmanagement
@@ -109,6 +116,9 @@ environment:
 send:
   admin:
     emails: false
+
+admin:
+  email: "y-alusta.tuotetiimi@dvv.fi"
 
 application:
   codeListUrl: ${environment.codelist.public-url}

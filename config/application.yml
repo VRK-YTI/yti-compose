@@ -1,6 +1,8 @@
 ---
 spring:
-  profiles: local
+  config:
+    activate:
+      on-profile: local
   cloud:
     config:
       enabled: false
@@ -65,7 +67,9 @@ environment:
 
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   cloud:
     config:
       enabled: false

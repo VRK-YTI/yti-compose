@@ -1,6 +1,8 @@
 ---
 spring:
-  profiles: local
+  config:
+    activate:
+      on-profile: local
   application:
     name: yti-messaging-api
   mail:
@@ -82,7 +84,9 @@ admin:
 
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   application:
     name: yti-messaging-api
   mail:
