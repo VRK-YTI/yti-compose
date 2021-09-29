@@ -1,6 +1,8 @@
 ---
 spring:
-  profiles: local
+  config:
+    activate:
+      on-profile: local
   application:
     name: yti-codelist-public-api-service
 
@@ -43,7 +45,9 @@ yti_codelist_public_api_service_elastic_cluster: ${environment.codelist-elastic.
 
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   application:
     name: yti-codelist-public-api-service
 
