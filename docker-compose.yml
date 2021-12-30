@@ -117,7 +117,7 @@ services:
   # CODELIST
 
   yti-codelist-elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.22
     container_name: yti-codelist-elasticsearch
     restart: always
     ports:
@@ -213,7 +213,7 @@ services:
      - yti-network
 
   yti-terminology-elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.22
     container_name: "yti-terminology-elasticsearch"
     restart: always
     ports:
@@ -284,7 +284,7 @@ services:
      - yti-datamodel-api
   
   yti-datamodel-elasticsearch:
-    image: "docker.elastic.co/elasticsearch/elasticsearch:6.5.4"
+    image: "docker.elastic.co/elasticsearch/elasticsearch:6.8.22"
     container_name: "yti-datamodel-elasticsearch"
     restart: always
     ports:
