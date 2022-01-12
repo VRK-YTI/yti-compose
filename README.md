@@ -23,17 +23,17 @@ to your ~/.bashrc or ~/.bash_profile.
 
 ## Prerequisities
 
-### Java 1.8
+### Java 11
 
-Install Java JDK 8 (OpenJdk or Oracle)
+Install Java JDK 11 (OpenJdk or Oracle)
 
 ### Gradle
 
-Install gradle (Tested with 4.2)
+Install gradle (Tested with 6.8.1)
 
 ### Maven
 
-Install maven (Tested with 3.5.2)
+Install maven (Tested with 3.6.3)
 
 ### Docker
 
@@ -80,7 +80,22 @@ sudo docker-compose up -d yti-groupmanagement
 sudo src/script/init-admin.db
 ```
 
-Sets permissions for postgres and elasticsearch to write logs in /data/lods. Lastly running init-admin.sh will add one dummy admin user and organization to the database. 
+Sets permissions for postgres and elasticsearch to write logs in /data/logs. Lastly running init-admin.sh will add one dummy admin user and organization to the database. 
+If you are using Mac (Catalina or newer), note that root volume is read only and you have to create [a synthetic firmlink](https://derflounder.wordpress.com/2020/01/18/creating-root-level-directories-and-symbolic-links-on-macos-catalina/)
+
+## Storing data in development
+
+As default, the content you create in local environment is stored inside the container. That is, if you remove/recreate the container, all the data will be lost. If you want to store the data in your local machine, add volume mapping:
+
+``` 
+# yti-fuseki
+volumes:
+   - /data/fuseki:/fuseki/databases
+
+# yti-postgres
+volumes:
+   - /data/postgres:/var/lib/postgresql
+```
 
 ## Running services
 
@@ -120,15 +135,15 @@ docker ps -a
 
 Components can (and sometimes should) be built and published manually. Each component has build.sh script that builds the component. Here are some examples how to build components manually: 
 
-### YTI ActiveMQ
+### Common components 
+First install common libraries to local maven repository. Check required version from pom.xml / build.gradle files
 
 ```
-cd yti-activemq
-./build.sh
-cd ..
+cat */build.gradle | grep "yti-spring-security"
+cat */pom.xml | grep "yti-spring-security" -A1
 ```
 
-### YTI Spring Security
+#### YTI Spring Security
 
 ```
 cd yti-spring-security
@@ -137,7 +152,7 @@ git checkout tags/{{latest tag}}
 cd ..
 ```
 
-### YTI Spring Migration
+#### YTI Spring Migration
 ```
 cd yti-spring-migration
 git checkout tags/{{latest tag}}
@@ -145,7 +160,7 @@ git checkout tags/{{latest tag}}
 cd ..
 ```
 
-### Codelist common model
+#### Codelist common model
 ```
 cd yti-codelist-common-model
 ./build.sh
@@ -155,11 +170,21 @@ cd ..
 ### Java docker base image
 ```
 cd yti-docker-java-base
-./build.sh alpine
+./build.sh
 cd ..
 ```
 
-### Codelist
+### Other components
+
+### YTI ActiveMQ
+
+```
+cd yti-activemq
+./build.sh
+cd ..
+```
+
+#### Codelist
 
 #### Codelist Public API Service
 ```
