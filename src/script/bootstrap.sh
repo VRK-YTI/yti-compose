@@ -2,8 +2,7 @@
 
 #common libraries
 commonLibs="yti-spring-security
-yti-spring-migration
-yti-spring-mq"
+yti-spring-migration"
 #Component-list
 components="yti-codelist-common-model
 yti-docker-java-base
@@ -17,7 +16,6 @@ yti-terminology-ui
 yti-fuseki
 yti-datamodel-api
 yti-datamodel-ui
-yti-datamodel-database
 yti-groupmanagement
 yti-comments-api
 yti-comments-ui
