@@ -211,7 +211,8 @@ cd ..
 
 #### Terminology Termed API
 ```
-cd yti-terminology-termed-docker
+# Use forked termed-api repository
+cd termed-api
 ./build.sh
 cd ..
 ```
