@@ -41,24 +41,24 @@ environment:
     port: 5432
   codelist:
     public-host: localhost:9600
-    #public-host: koodistot.dev.yti.cloud.vrk.fi
+    #public-host: koodistot.dev.yti.cloud.dvv.fi
     public-url: http://${environment.codelist.public-host}
     api-url: http://localhost:9601
     #api-url: ${environment.codelist.public-url}
   terminology:
-    public-url: https://sanastot.dev.yti.cloud.vrk.fi
+    public-url: https://sanastot.dev.yti.cloud.dvv.fi
     url: http://localhost:9103
     #url: ${environment.terminology.public-url}
   datamodel:
-    public-url: https://tietomallit.dev.yti.cloud.vrk.fi
+    public-url: https://tietomallit.dev.yti.cloud.dvv.fi
     url: http://localhost:9004
     #url: ${environment.datamodel.public-url}
   groupmanagement:
-    public-url: https://rhp.dev.yti.cloud.vrk.fi
+    public-url: https://rhp.dev.yti.cloud.dvv.fi
     url: http://localhost:9302
-    #url: https://rhp.dev.yti.cloud.vrk.fi
+    #url: https://rhp.dev.yti.cloud.dvv.fi
   comments:
-    #public-host: kommentit.dev.yti.cloud.vrk.fi
+    #public-host: kommentit.dev.yti.cloud.dvv.fi
     public-host: localhost:9700
     public-url: http://${environment.comments.public-host}
   messaging:
@@ -114,20 +114,20 @@ environment:
     host: yti-postgres
     port: 5432
   codelist:
-    public-host: koodistot.dev.yti.cloud.vrk.fi
+    public-host: koodistot.dev.yti.cloud.dvv.fi
     public-url: https://${environment.codelist.public-host}
     api-url: http://yti-codelist-public-api-service:9601
   terminology:
-    public-url: https://sanastot.dev.yti.cloud.vrk.fi
+    public-url: https://sanastot.dev.yti.cloud.dvv.fi
     url: http://yti-terminology-api:9103
   datamodel:
-    public-url: https://tietomallit.dev.yti.cloud.vrk.fi
+    public-url: https://tietomallit.dev.yti.cloud.dvv.fi
     url: http://yti-datamodel-api:9004
   groupmanagement:
-    public-url: https://rhp.dev.yti.cloud.vrk.fi
+    public-url: https://rhp.dev.yti.cloud.dvv.fi
     url: http://yti-groupmanagement:9302
   comments:
-    public-host: kommentit.dev.yti.cloud.vrk.fi
+    public-host: kommentit.dev.yti.cloud.dvv.fi
     public-url: https://${environment.comments.public-host}
   messaging:
     enabled: false
