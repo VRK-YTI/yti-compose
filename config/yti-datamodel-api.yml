@@ -59,7 +59,7 @@ impersonate:
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: docker
       
 server:
   port: 9004
