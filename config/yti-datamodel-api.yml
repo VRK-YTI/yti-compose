@@ -59,7 +59,7 @@ impersonate:
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: docker
       
 server:
   port: 9004
@@ -79,6 +79,7 @@ defaultTermedAPI: http://${environment.termed-api.host}:${environment.termed-api
 
 defaultGroupManagementAPI: ${environment.groupmanagement.url}/public-api/
 publicGroupManagementAPI: ${environment.groupmanagement.public-url}
+privateGroupManagementAPI: ${environment.groupmanagement.url}/private-api/
 defaultSuomiCodeServerAPI: ${environment.codelist.public-url}/codelist-api/api/v1/
 defaultTermedAPIUser: admin
 defaultTermedAPIUserSecret: admin
