@@ -340,6 +340,18 @@ services:
     networks:
      - yti-network
 
+  yti-fuseki-v4:
+    image: "yti-fuseki-v4:latest"
+    container_name: "yti-fuseki-v4"
+    restart: "no"
+    ports:
+     - "3031:3030"
+    volumes:
+     - /data/logs/yti-fuseki-v4:/fuseki/logs:Z
+     - /data/fuseki-v4:/fuseki/databases:Z
+    networks:
+     - yti-network
+
   # COMMENTS
 
   yti-comments-api:

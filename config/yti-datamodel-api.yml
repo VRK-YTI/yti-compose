@@ -3,6 +3,8 @@ spring:
   config:
     activate:
       on-profile: local
+  elasticsearch:
+    uris: http://${environment.datamodel-elastic.host}:${environment.datamodel-elastic.port}
 
 server:
   port: 9004
@@ -60,6 +62,8 @@ spring:
   config:
     activate:
       on-profile: docker
+  elasticsearch:
+    uris: http://${environment.datamodel-elastic.host}:${environment.datamodel-elastic.port}
       
 server:
   port: 9004
