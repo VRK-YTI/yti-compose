@@ -301,6 +301,25 @@ services:
     networks:
      - yti-network
 
+  yti-datamodel-opensearch:
+    image: "opensearchproject/opensearch:2.3.0"
+    container_name: "yti-datamodel-opensearch"
+    restart: always
+    ports:
+     - "9003:9200"
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node1
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "DISABLE_INSTALL_DEMO_CONFIG=true"
+      - "DISABLE_SECURITY_PLUGIN=true"
+      - "discovery.type=single-node"
+    volumes:
+     - /data/logs/yti-datamodel-opensearch:/usr/share/opensearch/logs:z
+    networks:
+     - yti-network
+
   yti-datamodel-api:
     image: "yti-datamodel-api:latest"
     container_name: "yti-datamodel-api"
@@ -321,11 +340,13 @@ services:
      - yti-groupmanagement
      - yti-datamodel-elasticsearch
      - yti-terminology-termed-api
+     - yti-datamodel-opensearch
     links:
      - yti-fuseki
      - yti-groupmanagement
      - yti-datamodel-elasticsearch
      - yti-terminology-termed-api
+     - yti-datamodel-opensearch
     networks:
      - yti-network
 
