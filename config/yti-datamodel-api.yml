@@ -95,6 +95,8 @@ publicCommentsFrontend: ${environment.comments.public-url}
 publicTermedAPI: ${environment.terminology.public-url}/termed-api/
 messagingEnabled: ${environment.messaging.enabled}
 defaultNamespace: http://uri.suomi.fi/datamodel/ns/
+openSearchHost: ${environment.opensearch.host}
+openSearchHttpPort: ${environment.opensearch.port}
 
 provenance: true
 
