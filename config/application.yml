@@ -131,3 +131,6 @@ environment:
     public-url: https://${environment.comments.public-host}
   messaging:
     enabled: false
+  opensearch:
+    host: yti-datamodel-opensearch
+    port: 9200
