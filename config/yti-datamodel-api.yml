@@ -63,7 +63,7 @@ spring:
     activate:
       on-profile: docker
   elasticsearch:
-    uris: http://${environment.datamodel-elastic.host}:${environment.datamodel-elastic.port}
+    uris: http://${environment.datamodel-opensearch.host}:${environment.datamodel-opensearch.port}
       
 server:
   port: 9004
@@ -75,6 +75,11 @@ tomcat:
 elasticHost: ${environment.datamodel-elastic.host}
 elasticHttpPort: ${environment.datamodel-elastic.port}
 elasticHttpScheme: http
+
+openSearchHost: ${environment.datamodel-opensearch.host}
+openSearchHttpPort: ${environment.datamodel-opensearch.port}
+openSearchHttpScheme: http
+allowComplexOpenSearchQueries: false
 
 endpoint: http://${environment.fuseki.host}:${environment.fuseki.port}
 

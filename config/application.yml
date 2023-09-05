@@ -101,6 +101,9 @@ environment:
   terminology-elastic:
     host: yti-terminology-elasticsearch
     port: 9200
+  datamodel-opensearch:
+    host: yti-datamodel-opensearch
+    port: 9200
   activemq:
     host: yti-activemq
     port: 61616
