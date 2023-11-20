@@ -27,7 +27,7 @@ services:
   #yti-codelist-kibana:
   #  image: docker.elastic.co/kibana/kibana:6.5.4
   #  container_name: yti-kibana
-  #  restart: always
+  #  restart: "no"
   #  ports:
   #   - "5601:5601"
   #  environment:
@@ -38,7 +38,7 @@ services:
   #yti-terminology-kibana:
   #  image: docker.elastic.co/kibana/kibana:6.5.4
   #  container_name: yti-kibana
-  #  restart: always
+  #  restart: "no"
   #  ports:
   #   - "5602:5601"
   #  environment:
@@ -49,7 +49,7 @@ services:
   #yti-datamodel-kibana:
   #  image: docker.elastic.co/kibana/kibana:6.5.4
   #  container_name: yti-kibana
-  #  restart: always
+  #  restart: "no"
   #  ports:
   #   - "5603:5601"
   #  environment:
@@ -62,15 +62,21 @@ services:
   yti-postgres:
     image: yti-postgres:latest
     container_name: yti-postgres
-    restart: always
+    restart: "no"
     ports:
      - "5432:5432"
     volumes:
-     - /data/logs/yti-postgres:/data/logs/yti-postgres:Z
+     - ${YTI_COMPOSE_LOGS}/yti-postgres:/data/logs/yti-postgres:Z
+     - ${YTI_COMPOSE_DATA}/yti-postgres:/var/lib/postgresql/data:Z
     command: postgres -c logging_collector=on -c log_directory=/data/logs/yti-postgres
     environment: 
       # do not require password in local environment
       POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d groupmanagement"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     networks:
      - yti-network
 
@@ -79,7 +85,7 @@ services:
   yti-activemq:
     image: yti-activemq:latest
     container_name: yti-activemq
-    restart: always
+    restart: "no"
     ports:
      - "9900:8161"
      - "9901:61616"
@@ -89,7 +95,7 @@ services:
      - "ARTEMIS_MIN_MEMORY=512M"
      - "ARTEMIS_MAX_MEMORY=512M"
     volumes:
-     - /data/logs/{{ projectname }}:/var/lib/artemis/log:z
+     - ${YTI_COMPOSE_LOGS}/yti-activemq:/var/lib/artemis/log:z
     networks:
      - yti-network
 
@@ -98,19 +104,23 @@ services:
   yti-groupmanagement:
     image: yti-groupmanagement:latest
     container_name: yti-groupmanagement
-    restart: always
+    restart: "no"
     ports:
      - "9302:9302"
      - "9300:9300"
     volumes:
-     - ./config:/config
+     - ./config:/config:z
     environment:
      - "SPRING_PROFILES_ACTIVE=docker"
      - "SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-groupmanagement.yml"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 -O /dev/null http://localhost:9302/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     depends_on:
-     - yti-postgres
-    links:
-     - yti-postgres
+      yti-postgres:
+        condition: service_healthy
     networks:
      - yti-network
 
@@ -119,7 +129,7 @@ services:
   yti-codelist-elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.8.22
     container_name: yti-codelist-elasticsearch
-    restart: always
+    restart: "no"
     ports:
      - "9610:9200"
     environment:
@@ -130,6 +140,11 @@ services:
      - network.publish_host=127.0.0.1
      - discovery.type=single-node
      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -qs 'http://localhost:9200/_cluster/health?timeout=5s' | sed -E 's/.*\"status\":\"?([^,\"]*)\"?.*/\\1/' | grep -e yellow -e green"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     networks:
      - yti-network
 
@@ -137,57 +152,64 @@ services:
     image: yti-codelist-ui:latest
     container_name: yti-codelist-ui
     privileged: true
-    restart: always
+    restart: "no"
     ports:
-      - "9600:80"
+     - "9600:80"
     depends_on:
-     - yti-codelist-content-intake-service
-     - yti-codelist-public-api-service
-    links:
-     - yti-codelist-content-intake-service
-     - yti-codelist-public-api-service
+      yti-codelist-content-intake-service:
+        condition: service_healthy
+      yti-codelist-public-api-service:
+        condition: service_healthy
     networks:
      - yti-network
 
   yti-codelist-content-intake-service:
     image: yti-codelist-content-intake-service:latest
     container_name: yti-codelist-content-intake-service
-    restart: always
+    restart: "no"
     ports:
      - "9602:9602"
      - "9603:9603"
      - "19602:19602"
     volumes:
-     - ./config:/config
-     - /tmp/data/yti/yti-codelist-intake:/data/yti/yti-codelist-intake
+     - ./config:/config:z
+     - ${YTI_COMPOSE_DATA}/yti-codelist-intake:/data/yti/yti-codelist-intake:Z
     command: -j -Xmx2048M -a --spring.profiles.active=default,docker --spring.config.location=/config/application.yml,/config/yti-codelist-content-intake-service.yml
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 -O - http://localhost:9602/codelist-intake/actuator/health | grep '\"status\":\"UP\"' || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     depends_on:
-     - yti-groupmanagement
-     - yti-codelist-elasticsearch
-     - yti-postgres
-    links:
-     - yti-groupmanagement
-     - yti-codelist-elasticsearch
-     - yti-postgres
+      yti-groupmanagement:
+        condition: service_healthy
+      yti-codelist-elasticsearch:
+        condition: service_healthy
+      yti-postgres:
+        condition: service_healthy
     networks:
      - yti-network
 
   yti-codelist-public-api-service:
     image: yti-codelist-public-api-service:latest
     container_name: yti-codelist-public-api-service
-    restart: always
+    restart: "no"
     ports:
      - "9601:9601"
      - "19601:19601"
     volumes:
-     - ./config:/config
-     - /tmp/data/yti/yti-codelist-api:/data/yti/yti-codelist-api
-     - /data/logs/yti-codelist-api:/data/logs/yti-codelist-api:Z
+     - ./config:/config:z
+     - ${YTI_COMPOSE_DATA}/yti-codelist-api:/data/yti/yti-codelist-api:Z
+     - ${YTI_COMPOSE_LOGS}/yti-codelist-api:/data/logs/yti-codelist-api:Z
     command: -j -Xmx512M -a --spring.profiles.active=default,docker --spring.config.location=/config/application.yml,/config/yti-codelist-public-api-service.yml
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 -O - http://localhost:9601/codelist-api/actuator/health | grep '\"status\":\"UP\"' || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     depends_on:
-     - yti-codelist-elasticsearch
-    links:
-     - yti-codelist-elasticsearch
+      yti-codelist-elasticsearch:
+        condition: service_healthy
     networks:
      - yti-network
 
@@ -196,26 +218,30 @@ services:
   yti-terminology-termed-api:
     image: "yti-terminology-termed-api:latest"
     container_name: "yti-terminology-termed-api"
-    restart: always
+    restart: "no"
     environment:
      - SPRING_PROFILES_ACTIVE=default,docker
      - SPRING_CONFIG_LOCATION=/config/yti-terminology-termed-api.properties
     ports:
      - "9102:8080"
     volumes:
-     - ./config:/config:Z
-     - /data/logs/yti-terminology-termed-api:/data/logs/yti-terminology-termed-api:Z
+     - ./config:/config:z
+     - ${YTI_COMPOSE_LOGS}/yti-terminology-termed-api:/data/logs/yti-terminology-termed-api:Z
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 -O - http://admin:admin@localhost:8080/health | grep '\"code\": \"UP\"' || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     depends_on:
-     - yti-postgres
-    links:
-     - yti-postgres
+      yti-postgres:
+        condition: service_healthy
     networks:
      - yti-network
 
   yti-terminology-elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.8.22
     container_name: "yti-terminology-elasticsearch"
-    restart: always
+    restart: "no"
     ports:
      - "9104:9200"
     environment:
@@ -223,13 +249,18 @@ services:
      - transport.host=127.0.0.1
      - http.host=0.0.0.0
      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -qs 'http://localhost:9200/_cluster/health?timeout=5s' | sed -E 's/.*\"status\":\"?([^,\"]*)\"?.*/\\1/' | grep -e yellow -e green"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     networks:
      - yti-network
 
   yti-terminology-api:
     image: "yti-terminology-api:latest"
     container_name: "yti-terminology-api"
-    restart: always
+    restart: "no"
     environment:
      - SPRING_PROFILES_ACTIVE=default,docker
      - SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-terminology-api.yml
@@ -237,20 +268,24 @@ services:
      - "9101:9101"
      - "9103:9103"
     volumes:
-     - ./config:/config:Z
-     - /data/logs/yti-terminology-api:/data/logs/yti-terminology-api:Z
+     - ./config:/config:z
+     - ${YTI_COMPOSE_LOGS}/yti-terminology-api:/data/logs/yti-terminology-api:Z
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 -O - http://localhost:9103/terminology-api/actuator/health | grep '\"status\":\"UP\"' || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     depends_on:
-     - yti-groupmanagement
-     - yti-terminology-elasticsearch
-     - yti-terminology-termed-api
-     - yti-postgres
-     - yti-activemq
-    links:
-     - yti-groupmanagement
-     - yti-terminology-elasticsearch
-     - yti-terminology-termed-api
-     - yti-postgres
-     - yti-activemq
+      yti-groupmanagement:
+        condition: service_healthy
+      yti-terminology-elasticsearch:
+        condition: service_healthy
+      yti-terminology-termed-api:
+        condition: service_healthy
+      yti-activemq:
+        condition: service_started
+      yti-postgres:
+        condition: service_healthy
     networks:
      - yti-network
 
@@ -258,13 +293,17 @@ services:
     image: "yti-terminology-ui:latest"
     container_name: "yti-terminology-ui"
     privileged: true
-    restart: always
+    restart: "no"
     ports:
      - "9100:80"
+    environment:
+     - TERMINOLOGY_API_URL=http://yti-terminology-api:9103/terminology-api
+     - SECRET_COOKIE_PASSWORD=secret-cookie-password-for-local-development
+     - ENV_TYPE=dev
+     - REWRITE_PROFILE=docker
     depends_on:
-     - yti-terminology-api
-    links:
-     - yti-terminology-api
+      yti-terminology-api:
+        condition: service_healthy
     networks:
      - yti-network
 
@@ -273,20 +312,25 @@ services:
   yti-datamodel-ui:
     image: "yti-datamodel-ui:latest"
     container_name: "yti-datamodel-ui"
-    restart: always
+    restart: "no"
     ports:
      - "9000:80"
+    environment:
+     - TERMINOLOGY_API_URL=http://yti-terminology-api:9103/terminology-api
+     - DATAMODEL_API_URL=http://yti-datamodel-api:9004/datamodel-api
+     - SECRET_COOKIE_PASSWORD=secret-cookie-password-for-local-development
+     - ENV_TYPE=dev
+     - REWRITE_PROFILE=docker
     networks:
      - yti-network
     depends_on:
-     - yti-datamodel-api
-    links:
-     - yti-datamodel-api
+      yti-datamodel-api:
+        condition: service_healthy
   
   yti-datamodel-elasticsearch:
     image: "docker.elastic.co/elasticsearch/elasticsearch:6.8.22"
     container_name: "yti-datamodel-elasticsearch"
-    restart: always
+    restart: "no"
     ports:
      - "9002:9200"
     environment:
@@ -297,14 +341,19 @@ services:
      - discovery.type=single-node
      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     volumes:
-     - /data/logs/yti-datamodel-elasticsearch:/usr/share/elasticsearch/logs:z
+     - ${YTI_COMPOSE_LOGS}/yti-datamodel-elasticsearch:/usr/share/elasticsearch/logs:Z
+    healthcheck:
+      test: ["CMD-SHELL", "curl -qs 'http://localhost:9200/_cluster/health?timeout=5s' | sed -E 's/.*\"status\":\"?([^,\"]*)\"?.*/\\1/' | grep -e yellow -e green"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     networks:
      - yti-network
 
   yti-datamodel-opensearch:
     image: "opensearchproject/opensearch:2.3.0"
     container_name: "yti-datamodel-opensearch"
-    restart: always
+    restart: "no"
     ports:
      - "9003:9200"
     environment:
@@ -316,7 +365,12 @@ services:
       - "DISABLE_SECURITY_PLUGIN=true"
       - "discovery.type=single-node"
     volumes:
-     - /data/logs/yti-datamodel-opensearch:/usr/share/opensearch/logs:z
+     - ${YTI_COMPOSE_LOGS}/yti-datamodel-opensearch:/usr/share/opensearch/logs:Z
+    healthcheck:
+      test: ["CMD-SHELL", "curl -qs 'http://localhost:9200/_cluster/health?timeout=5s' | sed -E 's/.*\"status\":\"?([^,\"]*)\"?.*/\\1/' | grep -e yellow -e green"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     networks:
      - yti-network
 
@@ -333,31 +387,37 @@ services:
      - SPRING_PROFILES_ACTIVE=docker
      - SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-datamodel-api.yml
     volumes:
-     - ./config:/config:Z
-     - /data/logs/yti-datamodel-api:/data/logs/yti-datamodel-api:Z
+     - ./config:/config:z
+     - ${YTI_COMPOSE_LOGS}/yti-datamodel-api:/data/logs/yti-datamodel-api:Z
     depends_on:
-     - yti-fuseki
-     - yti-groupmanagement
-     - yti-datamodel-elasticsearch
-     - yti-terminology-termed-api
-     - yti-datamodel-opensearch
-    links:
-     - yti-fuseki
-     - yti-groupmanagement
-     - yti-datamodel-elasticsearch
-     - yti-terminology-termed-api
-     - yti-datamodel-opensearch
+      yti-fuseki-v4:
+        condition: service_healthy
+      yti-fuseki:
+        condition: service_healthy
+      yti-groupmanagement:
+        condition: service_healthy
+      yti-datamodel-elasticsearch:
+        condition: service_healthy
+      yti-terminology-termed-api:
+        condition: service_healthy
+      yti-datamodel-opensearch:
+        condition: service_healthy
     networks:
      - yti-network
 
   yti-fuseki:
     image: "yti-fuseki:latest"
     container_name: "yti-fuseki"
-    restart: always
+    restart: "no"
     ports:
      - "3030:3030"
     volumes:
-     - /data/logs/yti-fuseki:/fuseki/logs:Z
+     - ${YTI_COMPOSE_DATA}/yti-fuseki:/fuseki:Z
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 -O /dev/null http://localhost:3030/$$/ping || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     networks:
      - yti-network
 
@@ -368,8 +428,13 @@ services:
     ports:
      - "3031:3030"
     volumes:
-     - /data/logs/yti-fuseki-v4:/fuseki/logs:Z
-     - /data/fuseki-v4:/fuseki/databases:Z
+     - ${YTI_COMPOSE_LOGS}/yti-fuseki-v4:/fuseki/logs:Z
+     - ${YTI_COMPOSE_DATA}/yti-fuseki-v4:/fuseki/databases:Z
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 -O /dev/null http://localhost:3030/$$/ping || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     networks:
      - yti-network
 
@@ -378,34 +443,37 @@ services:
   yti-comments-api:
     image: "yti-comments-api:latest"
     container_name: "yti-comments-api"
-    restart: always
+    restart: "no"
     ports:
-     - "9701:9701"
+      - "9701:9701"
     volumes:
-     - ./config:/config
-     - /data/logs/yti-datamodel-api:/data/logs/yti-comments-api:Z
+      - ./config:/config:z
+      - ${YTI_COMPOSE_LOGS}/yti-comments-api:/data/logs/yti-comments-api:Z
     command: -j -Xmx2048M -a --spring.profiles.active=default,docker --spring.config.location=/config/application.yml,/config/yti-comments-api.yml
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 -O - http://localhost:9701/comments-api/actuator/health | grep '\"status\":\"UP\"' || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     depends_on:
-     - yti-postgres
-     - yti-groupmanagement
-    links:
-     - yti-postgres
-     - yti-groupmanagement
+      yti-groupmanagement:
+        condition: service_healthy
+      yti-postgres:
+        condition: service_healthy
     networks:
      - yti-network
 
   yti-comments-ui:
     image: "yti-comments-ui:latest"
     container_name: "yti-comments-ui"
-    restart: always
+    restart: "no"
     ports:
      - "9700:80"
     volumes:
-     - /data/logs/yti-datamodel-api:/data/logs/yti-comments-api:Z
+     - ${YTI_COMPOSE_LOGS}/yti-comments-ui:/data/logs/yti-comments-ui:Z
     depends_on:
-     - yti-comments-api
-    links:
-     - yti-comments-api
+      yti-comments-api:
+        condition: service_healthy
     networks:
      - yti-network
 
@@ -414,19 +482,18 @@ services:
   yti-messaging-api:
     image: "yti-messaging-api:latest"
     container_name: "yti-messaging-api"
-    restart: always
+    restart: "no"
     ports:
      - "9801:9801"
     volumes:
-     - ./config:/config
-     - /data/logs/yti-messaging-api:/data/logs/yti-messaging-api:Z
+     - ./config:/config:z
+     - ${YTI_COMPOSE_LOGS}/yti-messaging-api:/data/logs/yti-messaging-api:Z
     command: -j -Xmx2048M -a --spring.profiles.active=default,docker --spring.config.location=/config/application.yml,/config/yti-messaging-api.yml
     depends_on:
-     - yti-postgres
-     - yti-groupmanagement
-    links:
-     - yti-postgres
-     - yti-groupmanagement
+      yti-groupmanagement:
+        condition: service_healthy
+      yti-postgres:
+        condition: service_healthy
     networks:
      - yti-network
 
