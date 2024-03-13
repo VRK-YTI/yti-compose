@@ -289,6 +289,35 @@ services:
     networks:
      - yti-network
 
+  yti-terminology-api-v2:
+    image: "yti-terminology-api-v2:latest"
+    container_name: "yti-terminology-api-v2"
+    restart: "no"
+    environment:
+     - SPRING_PROFILES_ACTIVE=default,docker
+     - SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-terminology-api-v2.yml
+    ports:
+     - "9101:9101"
+     - "9103:9103"
+    volumes:
+     - ./config:/config:z
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 -O - http://localhost:9103/terminology-api/actuator/health | grep '\"status\":\"UP\"' || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      yti-groupmanagement:
+        condition: service_healthy
+      yti-datamodel-opensearch:
+        condition: service_healthy
+      yti-activemq:
+        condition: service_started
+      yti-fuseki-v4:
+        condition: service_started
+    networks:
+     - yti-network
+
   yti-terminology-ui:
     image: "yti-terminology-ui:latest"
     container_name: "yti-terminology-ui"
