@@ -1,0 +1,114 @@
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 30MB
+      max-request-size: 30MB
+  activemq:
+    broker-url: "tcp://${environment.activemq.host}:${environment.activemq.port}"
+    user: yti
+    password: "test"
+
+tomcat:
+  ajp:
+    port: 9101
+
+server:
+  port: 9103
+  servlet:
+    context-path: /terminology-api
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,application/javascript,application/json
+
+groupmanagement:
+  url: ${environment.groupmanagement.url}
+  public:
+    url: ${environment.groupmanagement.public-url}
+
+mq:
+  active:
+    subsystem: Vocabulary
+
+fuseki:
+  url: http://localhost:3031
+
+impersonate:
+  allowed: true
+
+migration:
+  enabled: true
+  packageLocation: fi.vm.yti.terminology.api.v2.migration.task
+
+version:
+  graph: urn:yti:terminology:version
+
+application:
+  public:
+    url: ${environment.terminology.public-url}
+
+fake:
+  login:
+    allowed: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 30MB
+      max-request-size: 30MB
+  activemq:
+    broker-url: "tcp://${environment.activemq.host}:${environment.activemq.port}"
+    user: yti
+    password: "test"
+
+tomcat:
+  ajp:
+    port: 9101
+
+server:
+  port: 9103
+  servlet:
+    context-path: /terminology-api
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,application/javascript,application/json
+
+groupmanagement:
+  url: ${environment.groupmanagement.url}
+  public:
+    url: ${environment.groupmanagement.public-url}
+
+mq:
+  active:
+    subsystem: Vocabulary
+
+fuseki:
+  url: http://${environment.fuseki-v4.host}:${environment.fuseki-v4.port}
+
+impersonate:
+  allowed: true
+
+migration:
+  enabled: true
+  packageLocation: fi.vm.yti.terminology.api.v2.migration.task
+
+version:
+  graph: urn:yti:terminology:version
+
+application:
+  public:
+    url: ${environment.terminology.public-url}
+
+fake:
+  login:
+    allowed: true
+

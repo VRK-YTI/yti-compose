@@ -17,7 +17,7 @@ elasticHost: ${environment.datamodel-elastic.host}
 elasticHttpPort: ${environment.datamodel-elastic.port}
 elasticHttpScheme: http
 
-endpoint: http://${environment.fuseki.host}:${environment.fuseki.port}
+endpoint: http://${environment.fuseki-v4.host}:${environment.fuseki-v4.port}
 
 devMode: true
 defaultTermedAPI: http://${environment.termed-api.host}:${environment.termed-api.port}/api/
@@ -81,7 +81,7 @@ openSearchHttpPort: ${environment.datamodel-opensearch.port}
 openSearchHttpScheme: http
 allowComplexOpenSearchQueries: false
 
-endpoint: http://${environment.fuseki.host}:${environment.fuseki.port}
+endpoint: http://${environment.fuseki-v4.host}:${environment.fuseki-v4.port}
 
 devMode: true
 defaultTermedAPI: http://${environment.termed-api.host}:${environment.termed-api.port}/api/
