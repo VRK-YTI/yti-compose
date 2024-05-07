@@ -33,6 +33,9 @@ environment:
   fuseki:
     host: 127.0.0.1
     port: 3030
+  fuseki-v4:
+    host: 127.0.0.1
+    port: 3031
   termed-api:
     host: 127.0.0.1
     port: 9102
@@ -109,6 +112,9 @@ environment:
     port: 61616
   fuseki:
     host: yti-fuseki
+    port: 3030
+  fuseki-v4:
+    host: yti-fuseki-v4
     port: 3030
   termed-api:
     host: yti-terminology-termed-api
