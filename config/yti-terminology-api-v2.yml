@@ -19,8 +19,7 @@ tomcat:
 
 server:
   port: 9103
-  servlet:
-    context-path: /terminology-api
+  context-path: /terminology-api
   compression:
     enabled: true
     mime-types: text/html,text/css,application/javascript,application/json
@@ -36,6 +35,9 @@ mq:
 
 fuseki:
   url: http://localhost:3031
+
+openSearch:
+  url: http://localhost:9003
 
 impersonate:
   allowed: true
@@ -76,8 +78,7 @@ tomcat:
 
 server:
   port: 9103
-  servlet:
-    context-path: /terminology-api
+  context-path: /terminology-api
   compression:
     enabled: true
     mime-types: text/html,text/css,application/javascript,application/json
@@ -93,6 +94,9 @@ mq:
 
 fuseki:
   url: http://${environment.fuseki-v4.host}:${environment.fuseki-v4.port}
+
+openSearch:
+  url: http://${environment.datamodel-opensearch.host}:${environment.datamodel-opensearch.port}
 
 impersonate:
   allowed: true
