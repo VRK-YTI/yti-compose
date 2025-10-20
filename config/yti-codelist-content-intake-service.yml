@@ -52,6 +52,7 @@ application:
   access-log: true
   initializeContent: true
   env: local
+  reIndexOnStartup: true
 
 frontend:
   defaultStatus: null
@@ -132,6 +133,7 @@ application:
   access-log: true
   initializeContent: true
   env: local
+  reIndexOnStartup: true
 
 frontend:
   defaultStatus: null

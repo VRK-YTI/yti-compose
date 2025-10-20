@@ -67,6 +67,9 @@ environment:
   messaging:
     url: http://localhost:9801
     enabled: true
+  opensearch:
+    host: localhost
+    port: 9003
 
 ---
 spring:
@@ -111,7 +114,7 @@ environment:
     host: yti-activemq
     port: 61616
   fuseki:
-    host: yti-fuseki
+    host: yti-fuseki-v4
     port: 3030
   fuseki-v4:
     host: yti-fuseki-v4
@@ -127,10 +130,10 @@ environment:
     public-url: https://${environment.codelist.public-host}
     api-url: http://yti-codelist-public-api-service:9601
   terminology:
-    public-url: https://sanastot.dev.yti.cloud.dvv.fi
+    public-url: http://localhost:9100
     url: http://yti-terminology-api:9103
   datamodel:
-    public-url: https://tietomallit.dev.yti.cloud.dvv.fi
+    public-url: http://localhost:3000
     url: http://yti-datamodel-api:9004
   groupmanagement:
     public-url: https://rhp.dev.yti.cloud.dvv.fi
