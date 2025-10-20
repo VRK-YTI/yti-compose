@@ -178,3 +178,8 @@ fake:
   login:
     allowed: true
 
+management:
+  health:
+    elasticsearch:
+      enabled: false
+

@@ -1,25 +1,3 @@
-# ---------------------------------------------------------------------------------------
-# Postgres
-# YTI Fuseki
-# YTI Groupmanagement - Groupmanagement API + UI bundle
-# YTI ActiveMQ - Active MQ
-# YTI Codelist - Intake Service
-# YTI Codelist - Public API Service
-# YTI Codelist - UI
-# YTI Codelist - ElasticSearch
-# YTI Terminology - Termed API
-# YTI Terminology - ElasticSearch
-# YTI Terminology - API
-# YTI Terminology - UI
-# YTI Datamodel - API
-# YTI Datamodel - UI
-# YTI Datamodel - ElasticSEarch
-# YTI Comments - API
-# YTI Comments - UI
-# ---------------------------------------------------------------------------------------
-
-version: '3'
-
 services:
 
   # KIBANA
@@ -35,17 +13,6 @@ services:
   #  networks:
   #   - yti-network
 
-  #yti-terminology-kibana:
-  #  image: docker.elastic.co/kibana/kibana:6.5.4
-  #  container_name: yti-kibana
-  #  restart: "no"
-  #  ports:
-  #   - "5602:5601"
-  #  environment:
-  #    ELASTICSEARCH_URL: http://yti-terminology-elasticsearch:9200
-  #  networks:
-  #   - yti-network
-
   #yti-datamodel-kibana:
   #  image: docker.elastic.co/kibana/kibana:6.5.4
   #  container_name: yti-kibana
@@ -53,9 +20,33 @@ services:
   #  ports:
   #   - "5603:5601"
   #  environment:
-  #    ELASTICSEARCH_URL: http://yti-datamodel-elasticsearch:9200
+  #    ELASTICSEARCH_URL: http://yti-datamodel-opensearch:9200
+  #  depends_on:
+  #    yti-datamodel-opensearch:
+  #      condition: service_healthy
   #  networks:
   #   - yti-network
+
+  yti-datamodel-opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.3.0
+    container_name: yti-datamodel-opensearch-dashboards
+    restart: "no"
+    environment:
+      OPENSEARCH_HOSTS: '["http://yti-datamodel-opensearch:9200"]' # must be a string with no spaces when specified as an environment variable
+      DISABLE_INSTALL_DEMO_CONFIG: "true"
+      DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "1"
+    depends_on:
+      yti-datamodel-opensearch:
+        condition: service_healthy
+    ports:
+      - 5601:5601
+    networks:
+     - yti-network
 
   # POSTGRES
 
@@ -66,8 +57,8 @@ services:
     ports:
      - "5432:5432"
     volumes:
-     - ${YTI_COMPOSE_LOGS}/yti-postgres:/data/logs/yti-postgres:Z
-     - ${YTI_COMPOSE_DATA}/yti-postgres:/var/lib/postgresql/data:Z
+     - yti-postgres-logs:/data/logs/yti-postgres:Z
+     - yti-postgres-data:/var/lib/postgresql/data:Z
     command: postgres -c logging_collector=on -c log_directory=/data/logs/yti-postgres
     environment: 
       # do not require password in local environment
@@ -77,25 +68,6 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-    networks:
-     - yti-network
-
-  # ACTIVEMQ
-
-  yti-activemq:
-    image: yti-activemq:latest
-    container_name: yti-activemq
-    restart: "no"
-    ports:
-     - "9900:8161"
-     - "9901:61616"
-    environment:
-     - "ARTEMIS_USERNAME=yti"
-     - "ARTEMIS_PASSWORD=test"
-     - "ARTEMIS_MIN_MEMORY=512M"
-     - "ARTEMIS_MAX_MEMORY=512M"
-    volumes:
-     - ${YTI_COMPOSE_LOGS}/yti-activemq:/var/lib/artemis/log:z
     networks:
      - yti-network
 
@@ -114,7 +86,7 @@ services:
      - "SPRING_PROFILES_ACTIVE=docker"
      - "SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-groupmanagement.yml"
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --tries=1 -O /dev/null http://localhost:9302/ || exit 1"]
+      test: ["CMD-SHELL", "curl -qsf http://localhost:9302/"]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -199,8 +171,6 @@ services:
      - "19601:19601"
     volumes:
      - ./config:/config:z
-     - ${YTI_COMPOSE_DATA}/yti-codelist-api:/data/yti/yti-codelist-api:Z
-     - ${YTI_COMPOSE_LOGS}/yti-codelist-api:/data/logs/yti-codelist-api:Z
     command: -j -Xmx512M -a --spring.profiles.active=default,docker --spring.config.location=/config/application.yml,/config/yti-codelist-public-api-service.yml
     healthcheck:
       test: ["CMD-SHELL", "wget -q --tries=1 -O - http://localhost:9601/codelist-api/actuator/health | grep '\"status\":\"UP\"' || exit 1"]
@@ -214,80 +184,6 @@ services:
      - yti-network
 
   # TERMINOLOGY
-
-  yti-terminology-termed-api:
-    image: "yti-terminology-termed-api:latest"
-    container_name: "yti-terminology-termed-api"
-    restart: "no"
-    environment:
-     - SPRING_PROFILES_ACTIVE=default,docker
-     - SPRING_CONFIG_LOCATION=/config/yti-terminology-termed-api.properties
-    ports:
-     - "9102:8080"
-    volumes:
-     - ./config:/config:z
-     - ${YTI_COMPOSE_LOGS}/yti-terminology-termed-api:/data/logs/yti-terminology-termed-api:Z
-    healthcheck:
-      test: ["CMD-SHELL", "wget -q --tries=1 -O - http://admin:admin@localhost:8080/health | grep '\"code\": \"UP\"' || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      yti-postgres:
-        condition: service_healthy
-    networks:
-     - yti-network
-
-  yti-terminology-elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.22
-    container_name: "yti-terminology-elasticsearch"
-    restart: "no"
-    ports:
-     - "9104:9200"
-    environment:
-     - xpack.security.enabled=false
-     - transport.host=127.0.0.1
-     - http.host=0.0.0.0
-     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    healthcheck:
-      test: ["CMD-SHELL", "curl -qs 'http://localhost:9200/_cluster/health?timeout=5s' | sed -E 's/.*\"status\":\"?([^,\"]*)\"?.*/\\1/' | grep -e yellow -e green"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-    networks:
-     - yti-network
-
-  yti-terminology-api:
-    image: "yti-terminology-api:latest"
-    container_name: "yti-terminology-api"
-    restart: "no"
-    environment:
-     - SPRING_PROFILES_ACTIVE=default,docker
-     - SPRING_CONFIG_LOCATION=/config/application.yml,/config/yti-terminology-api.yml
-    ports:
-     - "9101:9101"
-     - "9103:9103"
-    volumes:
-     - ./config:/config:z
-     - ${YTI_COMPOSE_LOGS}/yti-terminology-api:/data/logs/yti-terminology-api:Z
-    healthcheck:
-      test: ["CMD-SHELL", "wget -q --tries=1 -O - http://localhost:9103/terminology-api/actuator/health | grep '\"status\":\"UP\"' || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      yti-groupmanagement:
-        condition: service_healthy
-      yti-terminology-elasticsearch:
-        condition: service_healthy
-      yti-terminology-termed-api:
-        condition: service_healthy
-      yti-activemq:
-        condition: service_started
-      yti-postgres:
-        condition: service_healthy
-    networks:
-     - yti-network
 
   yti-terminology-api-v2:
     image: "yti-terminology-api-v2:latest"
@@ -311,8 +207,6 @@ services:
         condition: service_healthy
       yti-datamodel-opensearch:
         condition: service_healthy
-      yti-activemq:
-        condition: service_started
       yti-fuseki-v4:
         condition: service_started
     networks:
@@ -326,12 +220,12 @@ services:
     ports:
      - "9100:80"
     environment:
-     - TERMINOLOGY_API_URL=http://yti-terminology-api:9103/terminology-api
+     - TERMINOLOGY_API_URL=http://yti-terminology-api-v2:9103/terminology-api
      - SECRET_COOKIE_PASSWORD=secret-cookie-password-for-local-development
      - ENV_TYPE=dev
      - REWRITE_PROFILE=docker
     depends_on:
-      yti-terminology-api:
+      yti-terminology-api-v2:
         condition: service_healthy
     networks:
      - yti-network
@@ -345,7 +239,7 @@ services:
     ports:
      - "9000:80"
     environment:
-     - TERMINOLOGY_API_URL=http://yti-terminology-api:9103/terminology-api
+     - TERMINOLOGY_API_URL=http://yti-terminology-api-v2:9103/terminology-api
      - DATAMODEL_API_URL=http://yti-datamodel-api:9004/datamodel-api
      - SECRET_COOKIE_PASSWORD=secret-cookie-password-for-local-development
      - ENV_TYPE=dev
@@ -369,8 +263,8 @@ services:
      - network.publish_host=127.0.0.1
      - discovery.type=single-node
      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    volumes:
-     - ${YTI_COMPOSE_LOGS}/yti-datamodel-elasticsearch:/usr/share/elasticsearch/logs:Z
+    #volumes:
+    # - ${YTI_COMPOSE_LOGS}/yti-datamodel-elasticsearch:/usr/share/elasticsearch/logs:Z
     healthcheck:
       test: ["CMD-SHELL", "curl -qs 'http://localhost:9200/_cluster/health?timeout=5s' | sed -E 's/.*\"status\":\"?([^,\"]*)\"?.*/\\1/' | grep -e yellow -e green"]
       interval: 30s
@@ -393,8 +287,8 @@ services:
       - "DISABLE_INSTALL_DEMO_CONFIG=true"
       - "DISABLE_SECURITY_PLUGIN=true"
       - "discovery.type=single-node"
-    volumes:
-     - ${YTI_COMPOSE_LOGS}/yti-datamodel-opensearch:/usr/share/opensearch/logs:Z
+    #volumes:
+    # - ${YTI_COMPOSE_LOGS}/yti-datamodel-opensearch:/usr/share/opensearch/logs:Z
     healthcheck:
       test: ["CMD-SHELL", "curl -qs 'http://localhost:9200/_cluster/health?timeout=5s' | sed -E 's/.*\"status\":\"?([^,\"]*)\"?.*/\\1/' | grep -e yellow -e green"]
       interval: 30s
@@ -421,32 +315,10 @@ services:
     depends_on:
       yti-fuseki-v4:
         condition: service_healthy
-      yti-fuseki:
-        condition: service_healthy
       yti-groupmanagement:
-        condition: service_healthy
-      yti-datamodel-elasticsearch:
-        condition: service_healthy
-      yti-terminology-termed-api:
         condition: service_healthy
       yti-datamodel-opensearch:
         condition: service_healthy
-    networks:
-     - yti-network
-
-  yti-fuseki:
-    image: "yti-fuseki:latest"
-    container_name: "yti-fuseki"
-    restart: "no"
-    ports:
-     - "3030:3030"
-    volumes:
-     - ${YTI_COMPOSE_DATA}/yti-fuseki:/fuseki:Z
-    healthcheck:
-      test: ["CMD-SHELL", "wget -q --tries=1 -O /dev/null http://localhost:3030/$$/ping || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
     networks:
      - yti-network
 
@@ -456,9 +328,11 @@ services:
     restart: "no"
     ports:
      - "3031:3030"
+    environment:
+     - ADMIN_PASSWORD=changeme
     volumes:
-     - ${YTI_COMPOSE_LOGS}/yti-fuseki-v4:/fuseki/logs:Z
-     - ${YTI_COMPOSE_DATA}/yti-fuseki-v4:/fuseki/databases:Z
+     - yti-fuseki-v4-logs:/fuseki/logs:Z
+     - yti-fuseki-v4-data:/fuseki/databases:Z
     healthcheck:
       test: ["CMD-SHELL", "wget -q --tries=1 -O /dev/null http://localhost:3030/$$/ping || exit 1"]
       interval: 30s
@@ -529,3 +403,13 @@ services:
 networks:
   yti-network:
     driver: bridge
+
+volumes:
+  yti-postgres-data:
+    name: yti-postgres-data
+  yti-postgres-logs:
+    name: yti-postgres-logs
+  yti-fuseki-v4-data:
+    name: yti-fuseki-v4-data
+  yti-fuseki-v4-logs:
+    name: yti-fuseki-v4-logs
